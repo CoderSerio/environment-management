@@ -15,4 +15,16 @@ export default defineConfig({
 			LOCAL_HOST: "http://localhost:5173",
 		},
 	},
+	server: { //主要是加上这段代码
+		host: '127.0.0.1',
+		port: 5173,
+		proxy: {
+		  '/api': {
+			target: 'https://sm.ms/api/v2/upload',	//实际请求地址
+			changeOrigin: true,
+			rewrite: (path) => path.replace(/^\/api/, '')
+		  },
+		}
+	}
 });
+
