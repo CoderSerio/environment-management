@@ -13,8 +13,7 @@ const isVisible = ref(false)
 </script>
 
 <template>
-  <h3>污染物任务下发</h3>
-  <div class="operations">
+  <div class="header">
     <el-button type="primary" @click="isVisible = true">新建任务</el-button>
   </div>
 
@@ -46,7 +45,7 @@ const isVisible = ref(false)
 </template>
 
 <style scoped>
-  .operations {
+  .header {
     display: flex;
     justify-content: flex-end;
   }

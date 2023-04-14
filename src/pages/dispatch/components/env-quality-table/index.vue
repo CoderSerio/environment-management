@@ -14,10 +14,10 @@ const isVisible = ref(false)
 </script>
 
 <template>
-  <h3>环境质量监测任务下发</h3>
-  <div class="operations">
+   <div class="header">
     <el-button type="primary" @click="isVisible = true">新建任务</el-button>
   </div>
+
 
   <el-dialog v-model="isVisible" title="新建任务">
     TODO
@@ -39,14 +39,11 @@ const isVisible = ref(false)
       </template>
     </el-table-column>
   </el-table>
-
-
-
 </template>
 
 
 <style scoped>
-  .operations {
+  .header {
     display: flex;
     justify-content: flex-end;
   }
