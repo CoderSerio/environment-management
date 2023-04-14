@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref } from "vue";
 import { MOCK_DATA, columns, TaskOrderTableColumns } from "./config";
 
 const handleEdit = (index: number, row: TaskOrderTableColumns) => {
@@ -28,10 +27,9 @@ const handleDelete = (index: number, row: TaskOrderTableColumns) => {
   </el-table>
 </template>
 
-
 <style scoped>
-  .operations {
-    display: flex;
-    justify-content: flex-end;
-  }
+.operations {
+  display: flex;
+  justify-content: flex-end;
+}
 </style>

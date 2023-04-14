@@ -1,52 +1,62 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { reactive } from "vue";
 import { MOCK_DATA, columns, ContaminantTableColumns } from "./config";
+import ModalForm from '../modal-form/index.vue'
+import { TABLE_NAME } from "../../type";
+import TaskEditForm from '../modal-form/task-edit-form.vue'
 
+const handleDispatch = (index: number, row: ContaminantTableColumns) => {
+	console.log(index, row);
+};
 const handleEdit = (index: number, row: ContaminantTableColumns) => {
+	modalFormProps.isVisible = true
+	// TODO: 还要自动回填一些内容
 	console.log(index, row);
 };
 const handleDelete = (index: number, row: ContaminantTableColumns) => {
 	console.log(index, row);
 };
 
-const isVisible = ref(false)
+const modalFormProps = reactive({
+	isVisible: false,
+	title: '新建任务'
+})
+
+const taskEditFormProps = reactive({
+	tableName: TABLE_NAME.ENV_QUALITY
+})
 </script>
 
 <template>
-  <div class="header">
-    <el-button type="primary" @click="isVisible = true">新建任务</el-button>
-  </div>
+	<div class="header">
+		<el-button type="primary" @click="modalFormProps.isVisible = true">新建任务</el-button>
+	</div>
 
-  <el-dialog v-model="isVisible" title="新建任务">
-    TODO
-  </el-dialog>
-
+	<ModalForm :modalFormProps="modalFormProps">
+		<TaskEditForm :taskEditFormProps="taskEditFormProps" />
+	</ModalForm>
 
 	<el-table :data="MOCK_DATA" style="width: 100%">
-		<el-table-column
-			v-for="column in columns"
-			:label="column.label"
-			:prop="column.prop"
-		>
+		<el-table-column v-for="column in columns" :label="column.label" :prop="column.prop">
 			<template #default="scope">
 				{{ scope.row[column.prop] }}
 			</template>
 		</el-table-column>
 
 		<el-table-column label="Operations" width="200">
-			<template #header>操作</template> 
-      <template #default="scope">
-        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">下发</el-button>
-        <el-button size="small" @click="handleDelete(scope.$index, scope.row)">修改</el-button>
-        <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
+			<template #header>操作</template>
+			<template #default="scope">
+				<el-button size="small" @click="handleDispatch(scope.$index, scope.row)">下发</el-button>
+				<el-button size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
+				<el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+			</template>
 		</el-table-column>
 	</el-table>
 </template>
 
 <style scoped>
-  .header {
-    display: flex;
-    justify-content: flex-end;
-  }
+.header {
+	display: flex;
+	justify-content: flex-end;
+}
 </style>

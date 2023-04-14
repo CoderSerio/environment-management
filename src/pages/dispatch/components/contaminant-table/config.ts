@@ -10,12 +10,6 @@ export interface ContaminantTableColumns {
 	undertakenOrganization: string;
 	/** 频次 */
 	frequency: string;
-	/** 下发来源 */
-	// dispatchSource: string
-	// /** 下发来源姓名，只有B级用户下发时才显示 */
-	// dispatcherName: string
-	// /** 下发时间 */
-	// dispatchTime: string
 }
 
 export const MOCK_DATA: Array<ContaminantTableColumns> = [
