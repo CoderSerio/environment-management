@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Demo1 from '@/pages/common/demo1/index.vue'
 import Demo2 from '@/pages/common/demo2/index.vue'
+import Ataskorder from "@/pages/common/ATaskOrder/index.vue"
 import Demo3 from '@/pages/common/demo3/index.vue'
 </script>
 
@@ -9,9 +10,8 @@ import Demo3 from '@/pages/common/demo3/index.vue'
   <Demo1 />
   <Demo2 />
   <Demo3 />
+  <Ataskorder />
 </template>
-
-
 
 <style scoped>
 
