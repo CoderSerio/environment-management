@@ -1,7 +1,7 @@
 /** 污染物任务列表表头 */
 export interface EnvQualityTableColumns {
 	/** 类别 */
-	class: string;
+	class: Array<string>;
 	/** 点位名称 */
 	pointName: string;
 	/** GPS */
@@ -16,7 +16,7 @@ export interface EnvQualityTableColumns {
 
 export const MOCK_DATA: Array<EnvQualityTableColumns> = [
 	{
-		class: "类别1",
+		class: ["类别2"],
 		pointName: "1",
 		undertakenOrganization: "1",
 		frequency: "1",
@@ -26,9 +26,9 @@ export const MOCK_DATA: Array<EnvQualityTableColumns> = [
 ];
 
 export const columns = [
-	{ label: "类别", prop: "class" },
+	{ label: "类别", prop: "class", render: (cell: Array<string>) => cell?.join("、") },
 	{ label: "点位名称", prop: "pointName" },
-	{ label: "gps", prop: "GPS" },
+	{ label: "GPS", prop: "gps" },
 	{ label: "项目", prop: "program" },
 	{ label: "承担单位", prop: "undertakenOrganization" },
 	{ label: "频次", prop: "frequency" },

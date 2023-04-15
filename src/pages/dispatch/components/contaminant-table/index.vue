@@ -5,17 +5,9 @@ import ModalForm from '../modal-form/index.vue'
 import { TABLE_NAME } from "../../type";
 import TaskEditForm from '../modal-form/task-edit-form.vue'
 
-const handleDispatch = (index: number, row: ContaminantTableColumns) => {
-	console.log(index, row);
-};
-const handleEdit = (index: number, row: ContaminantTableColumns) => {
-	modalFormProps.isVisible = true
-	// TODO: 还要自动回填一些内容
-	console.log(index, row);
-};
-const handleDelete = (index: number, row: ContaminantTableColumns) => {
-	console.log(index, row);
-};
+const data = reactive({
+	tableData: [...MOCK_DATA]
+})
 
 const modalFormProps = reactive({
 	isVisible: false,
@@ -23,23 +15,43 @@ const modalFormProps = reactive({
 })
 
 const taskEditFormProps = reactive({
-	tableName: TABLE_NAME.ENV_QUALITY
+	tableName: TABLE_NAME.ENV_QUALITY,
+	tableData: data.tableData,
+	index: 0,
+	defaultFormData: {},
+	close: () => modalFormProps.isVisible = false
 })
+
+const handleDispatch = (index: number, row: ContaminantTableColumns) => {
+	console.log(index, row);
+};
+const handleAdd = (index: number, row: ContaminantTableColumns) => {
+	modalFormProps.isVisible = true
+	taskEditFormProps.defaultFormData = {}
+}
+const handleEdit = (index: number, row: ContaminantTableColumns) => {
+	modalFormProps.isVisible = true
+	taskEditFormProps.defaultFormData = { ...row }
+	taskEditFormProps.index = index
+};
+const handleDelete = (index: number, row: ContaminantTableColumns) => {
+	console.log(index, row);
+};
 </script>
 
 <template>
 	<div class="header">
-		<el-button type="primary" @click="modalFormProps.isVisible = true">新建任务</el-button>
+		<el-button type="primary" @click="handleAdd">新建任务</el-button>
 	</div>
 
 	<ModalForm :modalFormProps="modalFormProps">
 		<TaskEditForm :taskEditFormProps="taskEditFormProps" />
 	</ModalForm>
 
-	<el-table :data="MOCK_DATA" style="width: 100%">
+	<el-table :data="data.tableData" style="width: 100%">
 		<el-table-column v-for="column in columns" :label="column.label" :prop="column.prop">
 			<template #default="scope">
-				{{ scope.row[column.prop] }}
+				{{ column?.render ? column.render(scope.row[column.prop]) : scope.row[column.prop] }}
 			</template>
 		</el-table-column>
 
