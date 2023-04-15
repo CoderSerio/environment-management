@@ -5,6 +5,7 @@ import Ataskorder from "@/pages/common/ATaskOrder/index.vue"
 import Demo3 from '@/pages/common/demo3/index.vue'
 import verify from '@/pages/common/verify/index.vue'
 import CTaskSubmission from '@/pages/common/CTaskSubmission/index.vue'
+import map1 from '@/pages/common/map/index.vue'
 import { ref } from 'vue';
 const activeName = ref('1')
 
@@ -22,6 +23,8 @@ const activeName = ref('1')
       <Ataskorder />
       <verify />
       <CTaskSubmission />
+      <map1 />
+
     </el-tab-pane>
   </el-tabs>
 </template>

@@ -10,12 +10,12 @@ import TaskProcess from './components/task-process/index.vue'
 import TaskDetail from './components/task-detail/index.vue'
 
 import { onMounted } from 'vue'
-import { getChengDuCityMapData } from '@/apis/map'
+import { getMapData } from '@/apis/map'
 
 
 const getMapData = async () => {
-  const data = await getChengDuCityMapData()
-  console.log('地图数据', data)
+  // const data = await getChengDuCityMapData()
+  // console.log('地图数据', data)
 }
 
 onMounted(() => {
