@@ -3,8 +3,7 @@ import { USER_LEVEL,User } from "@/type";
 
 
 
-const defaultUser = window.sessionStorage.getItem('userInfo')?? {id:'未登录'}
-console.log(defaultUser,'!!!!!!!!!!!!!!')
+const defaultUser =JSON.parse(window.sessionStorage.getItem('userInfo')?? "id:'未登录'" ) 
 /** 获得全局状态 */
 export const useUserStore = defineStore("user", {
 	state:()=>({
