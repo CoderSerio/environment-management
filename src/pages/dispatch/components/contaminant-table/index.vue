@@ -64,22 +64,7 @@ const taskEditFormProps = reactive({
     				</template>
   			</el-popconfirm>
 			
-			<el-popconfirm @confirm="handleEdit(scope.$index, scope.row)"
-    				width="220"
-    				confirm-button-text="确认"
-    				cancel-button-text="取消"
-    				:icon="InfoFilled"
-    				icon-color="#626AEF"
-    				title="您确定修改该项吗?"
-  				>
-    				<template #reference>
-     		 		<el-button
-          				link
-          				type="primary"
-          				size="small"
-        			>修改</el-button>
-    				</template>
-  			</el-popconfirm>
+			<el-button size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
 			
 			<el-popconfirm @confirm="handleDelete(scope.$index, scope.row)"
     				width="220"
