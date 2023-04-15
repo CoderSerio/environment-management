@@ -3,6 +3,7 @@ import { Ref, ref } from 'vue';
 import { Timer } from '@element-plus/icons-vue'
 import { Action, ElMessage, ElMessageBox, UploadProps, UploadUserFile } from 'element-plus';
 import { UploadFilled } from '@element-plus/icons-vue'
+import { Message } from "element-plus";
 
 // let name:Ref<string> = ref(" ")
 // function handleFileUpload(e:any){
@@ -33,10 +34,12 @@ const fileList = ref<UploadUserFile[]>([
 let isUpload = false
 let upload = 0
 //事件控制
-
-const newTask = () => {
-
+/*点击新建任务事件，显示上传框，重置上传标志*/
+const newTask = ()=>{
+  isUpload = false
+  dialogVisible.value = true
 }
+// 点击确认事件，根据上传标志检查是否成功上传并对用户进行提醒
 const sentTask = () => {
   if (isUpload) {
     dialogVisible.value = false
@@ -114,42 +117,52 @@ const handleClose = (done: () => void) => {
 </script>
 
 <template>
-  <div class="main">
-    <div class="button">
-      <el-button type="primary" @click="dialogVisible = true">新建任务</el-button>
-    </div>
-    <el-table :data="tableData" table-layout="fixed" size="large" class="table">
-      <el-table-column label="文件名称" width="280" align="center">
-        <template #default="scope">
-          <div style="display: flex; align-items: center;justify-content: center;">
-            <el-icon>
-              <timer />
-            </el-icon>
-            <span style="margin-left: 10px">{{ scope.row.name }}</span>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column label="下发时间" width="480" align="center">
-        <template #default="scope">
-          <el-popover effect="light" trigger="hover" placement="top" width="auto">
-            <template #default>
-              <div>具体时间： {{ scope.row.Accuratetime }}</div>
-            </template>
-            <template #reference>
-              <el-tag>{{ scope.row.time }}</el-tag>
-            </template>
-          </el-popover>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" align="center" header-align="center">
-
-        <template #default="scope">
-          <el-button size="small" @click="handleEdit(scope.$index, scope.row)">下发</el-button>
-          <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          <el-button size="small" type="" @click="taskChange(scope.$index, scope.row)">修改</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div class="main">
+        <div class="button">
+            <el-button type="primary" @click="newTask" >新建任务</el-button>
+        </div>
+<el-table :data="tableData"  table-layout="fixed" size="large" class="table">
+    <el-table-column label="文件名称" width="280"  align="center" >
+      <template #default="scope">
+        <div style="display: flex; align-items: center;justify-content: center;">
+          <el-icon><timer /></el-icon>
+          <span style="margin-left: 10px">{{ scope.row.name }}</span>
+        </div>
+      </template>
+    </el-table-column>
+    <el-table-column label="下发时间" width="480" align="center">
+      <template #default="scope">
+        <el-popover effect="light" trigger="hover" placement="top" width="auto">
+          <template #default>
+            <div>具体时间： {{ scope.row.Accuratetime }}</div>
+          </template>
+          <template #reference>
+            <el-tag>{{ scope.row.time }}</el-tag>
+          </template>
+        </el-popover>
+      </template>
+    </el-table-column >
+    <el-table-column label="操作" align="center" header-align="center" >
+        
+      <template #default="scope">
+        <el-button size="small" @click="handleEdit(scope.$index, scope.row)"
+          >下发</el-button
+        >
+        <el-button
+          size="small" 
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)"
+          >删除</el-button
+        >
+        <el-button
+          size="small" 
+          type=""
+          @click="taskChange(scope.$index, scope.row)"
+          >修改</el-button
+        >
+      </template>
+    </el-table-column>
+  </el-table>
 
     <el-dialog v-model="dialogVisible" title="新建任务" width="30%" :before-close="handleClose">
       <el-upload v-model:file-list="fileList" method="POST" class="upload-demo" drag action="/api" multiple="true"

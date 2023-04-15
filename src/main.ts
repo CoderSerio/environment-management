@@ -4,6 +4,7 @@ import App from "./App.vue";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import { router, routes } from "./routes";
+import { ElMessage } from "element-plus";
 import { useUserStore } from "./stores";
 import { USER_LEVEL } from "./type";
 
@@ -28,7 +29,7 @@ router.beforeEach((to, from, next) => {
 		if (item.path == to.path) {
 			console.log(USER_LEVEL[+item.rightControl], userStore.getUser);
 			if (USER_LEVEL[item.rightControl] > userStore.getUser.level) {
-				alert("用户权限不足");
+				ElMessage.warning("抱歉，用户权限不足");
 				next("/");
 			} else {
 				next();
