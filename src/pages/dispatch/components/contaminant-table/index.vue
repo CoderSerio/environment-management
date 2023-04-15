@@ -92,7 +92,7 @@ const taskEditFormProps = reactive({
     				<template #reference>
      		 		<el-button
           				link
-          				type="primary"
+          				type="danger"
           				size="small"
         			>删除</el-button>
     				</template>
