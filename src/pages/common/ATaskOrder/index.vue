@@ -33,10 +33,12 @@ const fileList = ref<UploadUserFile[]>([
 let isUpload = false
 let upload = 0
 //事件控制
-
+/*点击新建任务事件，显示上传框，重置上传标志*/
 const newTask = ()=>{
-
+  isUpload = false
+  dialogVisible.value = true
 }
+// 点击确认事件，根据上传标志检查是否成功上传并对用户进行提醒
 const sentTask =()=>{
     if(isUpload){
         dialogVisible.value = false
@@ -115,7 +117,7 @@ const handleClose = (done: () => void) => {
 <template>
     <div class="main">
         <div class="button">
-            <el-button type="primary" @click="dialogVisible = true" >新建任务</el-button>
+            <el-button type="primary" @click="newTask" >新建任务</el-button>
         </div>
 <el-table :data="tableData"  table-layout="fixed" size="large" class="table">
     <el-table-column label="文件名称" width="280"  align="center" >
