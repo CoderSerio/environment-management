@@ -13,7 +13,6 @@ import Chart from './chart/index.vue'
 <style scoped>
 .wrapper {
   display: flex;
-
 }
 
 .card {

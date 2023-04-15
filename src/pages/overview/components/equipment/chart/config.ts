@@ -4,18 +4,18 @@ export const option = {
 	// tooltip: {
 	// 	trigger: "item",
 	// },
-	legend: {
-		top: "5%",
-		left: "center",
-		// doesn't perfectly work with our tricks, disable it
-		selectedMode: false,
-	},
+	// legend: {
+	// 	top: "5%",
+	// 	left: "center",
+	// 	// doesn't perfectly work with our tricks, disable it
+	// 	selectedMode: false,
+	// },
 	series: [
 		{
 			name: "Access From",
 			type: "pie",
 			radius: ["40%", "70%"],
-			center: ["50%", "70%"],
+			center: ["50%", "50%"],
 			// adjust the start angle
 			startAngle: 180,
 			label: {

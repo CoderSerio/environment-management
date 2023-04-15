@@ -19,6 +19,5 @@ import Chart from './chart/index.vue'
   width: 100%;
   display: flex;
   justify-content: center;
-  ;
 }
 </style>
