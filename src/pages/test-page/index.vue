@@ -3,6 +3,7 @@ import Demo1 from '@/pages/common/demo1/index.vue'
 import Demo2 from '@/pages/common/demo2/index.vue'
 import Ataskorder from "@/pages/common/ATaskOrder/index.vue"
 import Demo3 from '@/pages/common/demo3/index.vue'
+import Demo4 from '@/pages/common/demo4/index.vue'
 import verify from '@/pages/common/verify/index.vue'
 import { ref } from 'vue';
 const activeName = ref('1')
@@ -18,8 +19,9 @@ const activeName = ref('1')
       <Demo3 />
     </el-tab-pane>
     <el-tab-pane label="组件请放到这里" name="2">
-      <Ataskorder />
-      <verify />
+      <!-- <Ataskorder /> -->
+      <Demo4 />
+      <!-- <verify /> -->
     </el-tab-pane>
   </el-tabs>
 </template>
