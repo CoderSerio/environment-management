@@ -45,6 +45,11 @@ export const routes:Iroutes[] = [
 		rightControl:'RIGHT_CONTROL_READ_LOW',
 		component: () => import(/* webpackChunkName: "data-list" */ "@/pages/my-task/index.vue"),
 	},
+	{
+		path: "/overview",
+		name: "数据总览",
+		component: () => import(/* webpackChunkName: "data-list" */ "@/pages/overview/index.vue"),
+	},
 ];
 
 export const router = createRouter({
