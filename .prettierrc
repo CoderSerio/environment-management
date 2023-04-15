@@ -7,5 +7,6 @@
 	"TrailingCooma": "all",
 	"bracketSpacing": true,
 	"arrowParens": "always",
-	"jsxBracketSameLine": true
+	"jsxBracketSameLine": true,
+	"singleAttributePerLine": true
 }

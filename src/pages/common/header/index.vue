@@ -1,16 +1,23 @@
 <script lang="ts" setup>
-import { User, USER_LEVEL, useUserStore } from '@/stores';
+import { useUserStore } from '@/stores';
+import { USER_LEVEL,User} from '@/type';
+import { ElMessage } from "element-plus";
+import { router } from '@/routes';
 const userStore = useUserStore()
 
 const userAccounts: Array<User> = [
-  { id: '123', level: USER_LEVEL.A }, 
-  { id: '456', level: USER_LEVEL.B }, 
-  { id: '769', level: USER_LEVEL.C }
+  { id: '123', level: USER_LEVEL.RIGHT_CONTROL_READ_HIEGHT }, 
+  { id: '456', level: USER_LEVEL.RIGHT_CONTROL_READ_MID }, 
+  { id: '769', level: USER_LEVEL.RIGHT_CONTROL_READ_LOW },
+  { id: '000', level: USER_LEVEL.RIGHT_CONTROL_NONE },
 ]
 
 const handleSelect = (key: string | number, path: Array<string>) => {
+  console.log(key);
   const activeUser = userAccounts[+key]
-  userStore.updateUser(activeUser)
+  userStore.setUser(activeUser)
+  key==3? ElMessage.success('退出成功'):ElMessage.success('切换用户成功')
+  router.push('/')
 }
 </script>
 
@@ -29,14 +36,15 @@ const handleSelect = (key: string | number, path: Array<string>) => {
       <el-menu-item 
         v-for="i, index in userAccounts" 
         :index="index"
+        v-show="i.id!=='000'"
         :key="i.id">
         {{USER_LEVEL[i.level as number]}}级用户
       </el-menu-item>
     </el-sub-menu>
 
     <el-sub-menu index="username">
-      <template #title>用户{{userStore?.user?.id ?? '--'}}</template>
-      <el-menu-item index="0">退出登录</el-menu-item>
+      <template #title>用户{{userStore.getUser?.id ?? '--'}}</template>
+      <el-menu-item index="3" key="000">退出登录</el-menu-item>
     </el-sub-menu>
   </el-menu>
 </template>
