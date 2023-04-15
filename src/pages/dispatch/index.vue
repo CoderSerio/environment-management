@@ -7,13 +7,22 @@ import { ref } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
 
 const activeTabName = ref(TABLE_NAME.CONTAMINANT)
+import ATaskOrder from "@/pages/common/ATaskOrder/index.vue"
+import { USER_LEVEL,useUserStore } from '@/stores';
+import { relative } from "path";
+import { ref } from "vue";
+const userStore = useUserStore()
 
+const isA = userStore.user.level===USER_LEVEL.A?true:false
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)
 }
 </script>
 
 <template>
+  <div>
+    <ATaskOrder v-show="isA" />
+  </div>
   <h3>任务文件列表</h3>
   <TaskOrderTable />
 
