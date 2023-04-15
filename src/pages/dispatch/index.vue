@@ -2,18 +2,16 @@
 import ContaminantTable from './components/contaminant-table/index.vue'
 import EnvQualityTable from './components/env-quality-table/index.vue'
 import TaskOrderTable from './components/task-order-table/index.vue'
-import { TABLE_NAME } from './type'
-import { ref } from 'vue'
+import { TABLE_NAME} from './type'
+import{USER_LEVEL} from '@/type'
 import type { TabsPaneContext } from 'element-plus'
-
-const activeTabName = ref(TABLE_NAME.CONTAMINANT)
 import ATaskOrder from "@/pages/common/ATaskOrder/index.vue"
-import { USER_LEVEL,useUserStore } from '@/stores';
+import { useUserStore } from '@/stores';
 import { relative } from "path";
 import { ref } from "vue";
 const userStore = useUserStore()
-
-const isA = userStore.user.level===USER_LEVEL.A?true:false
+const activeTabName = ref(TABLE_NAME.CONTAMINANT)
+const isA = userStore.user.level===USER_LEVEL.RIGHT_CONTROL_READ_HIEGHT?true:false
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)
 }
