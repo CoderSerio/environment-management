@@ -1,13 +1,12 @@
 import { defineStore } from "pinia";
-import { USER_LEVEL,User } from "@/type";
+import {User } from "@/type";
 
 
-
+// 获取持久化状态
 const defaultUser =JSON.parse(window.sessionStorage.getItem('userInfo')?? "id:'未登录'" ) 
 /** 获得全局状态 */
 export const useUserStore = defineStore("user", {
 	state:()=>({
-		//占时默认参数后续添加持久化
 		user:defaultUser as User
 	}),
 	getters:{
@@ -23,17 +22,4 @@ export const useUserStore = defineStore("user", {
 			this.$state.user = val
 		}
 	}
-	/** 当前登录的用户信息 */
-	// const user = reactive<User>({});
-
-	// /** 更新当前登录的用户信息 */
-	// const updateUser = (info: User) => {
-	// 	user.id = info?.id;
-	// 	user.level = info?.level;
-	// };
-
-	// return {
-	// 	user,
-	// 	updateUser,
-	// };
 })
