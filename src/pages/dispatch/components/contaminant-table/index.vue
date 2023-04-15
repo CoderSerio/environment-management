@@ -35,7 +35,7 @@ const handleEdit = (index: number, row: ContaminantTableColumns) => {
 	taskEditFormProps.index = index
 };
 const handleDelete = (index: number, row: ContaminantTableColumns) => {
-	console.log(index, row);
+	data.tableData.splice(index, 1)
 };
 </script>
 

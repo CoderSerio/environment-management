@@ -39,9 +39,8 @@ const handleEdit = (index: number, row: EnvQualityTableColumns) => {
   taskEditFormProps.index = index
 };
 const handleDelete = (index: number, row: EnvQualityTableColumns) => {
-  console.log(index, row);
+  data.tableData.splice(index, 1)
 };
-
 </script>
 
 <template>
