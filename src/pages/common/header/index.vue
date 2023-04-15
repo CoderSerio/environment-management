@@ -1,16 +1,19 @@
 <script lang="ts" setup>
-import { User, USER_LEVEL, useUserStore } from '@/stores';
+import { useUserStore } from '@/stores';
+import { USER_LEVEL,User} from '@/type';
+import { router } from '@/routes';
 const userStore = useUserStore()
 
 const userAccounts: Array<User> = [
-  { id: '123', level: USER_LEVEL.A }, 
-  { id: '456', level: USER_LEVEL.B }, 
-  { id: '769', level: USER_LEVEL.C }
+  { id: '123', level: USER_LEVEL.RIGHT_CONTROL_READ_HIEGHT }, 
+  { id: '456', level: USER_LEVEL.RIGHT_CONTROL_READ_MID }, 
+  { id: '769', level: USER_LEVEL.RIGHT_CONTROL_READ_LOW }
 ]
 
 const handleSelect = (key: string | number, path: Array<string>) => {
   const activeUser = userAccounts[+key]
-  userStore.updateUser(activeUser)
+  userStore.setUser(activeUser)
+  router.push('/')
 }
 </script>
 
@@ -35,7 +38,7 @@ const handleSelect = (key: string | number, path: Array<string>) => {
     </el-sub-menu>
 
     <el-sub-menu index="username">
-      <template #title>用户{{userStore?.user?.id ?? '--'}}</template>
+      <template #title>用户{{userStore.getUser?.id ?? '--'}}</template>
       <el-menu-item index="0">退出登录</el-menu-item>
     </el-sub-menu>
   </el-menu>
