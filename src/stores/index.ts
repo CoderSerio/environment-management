@@ -2,8 +2,12 @@ import { defineStore } from "pinia";
 import {User } from "@/type";
 
 
+const userNone:User={
+	id:'未登录',
+	level:0
+}
 // 获取持久化状态
-const defaultUser =JSON.parse(window.sessionStorage.getItem('userInfo')?? "id:'未登录'" ) 
+const defaultUser =JSON.parse(window.sessionStorage.getItem('userInfo')|| JSON.stringify(userNone)) 
 /** 获得全局状态 */
 export const useUserStore = defineStore("user", {
 	state:()=>({
