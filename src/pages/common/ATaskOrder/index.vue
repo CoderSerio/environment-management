@@ -3,6 +3,7 @@ import { Ref, ref } from 'vue';
 import { Timer } from '@element-plus/icons-vue'
 import { Action, ElMessage, ElMessageBox, UploadProps, UploadUserFile } from 'element-plus';
 import { UploadFilled } from '@element-plus/icons-vue'
+import { Message } from "element-plus";
 
 // let name:Ref<string> = ref(" ")
 // function handleFileUpload(e:any){
