@@ -46,9 +46,58 @@ const taskEditFormProps = reactive({
     <el-table-column label="Operations" width="200">
       <template #header>操作</template>
       <template #default="scope">
-        <el-button size="small" @click="handleDispatch(scope.$index, scope.row)">下发</el-button>
-        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
-        <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          <el-popconfirm @confirm="handleDispatch(scope.$index, scope.row)"
+    				width="220"
+    				confirm-button-text="确认"
+    				cancel-button-text="取消"
+    				:icon="InfoFilled"
+    				icon-color="#626AEF"
+    				title="您确定下发该项吗?"
+  				>
+    				<template #reference>
+     		 		<el-button
+          				link
+          				type="primary"
+          				size="small"
+         
+        			>下发</el-button>
+    				</template>
+  			</el-popconfirm>
+			
+			<el-popconfirm @confirm="handleEdit(scope.$index, scope.row)"
+    				width="220"
+    				confirm-button-text="确认"
+    				cancel-button-text="取消"
+    				:icon="InfoFilled"
+    				icon-color="#626AEF"
+    				title="您确定修改该项吗?"
+  				>
+    				<template #reference>
+     		 		<el-button
+          				link
+          				type="primary"
+          				size="small"
+        			>修改</el-button>
+    				</template>
+  			</el-popconfirm>
+			
+			<el-popconfirm @confirm="handleDelete(scope.$index, scope.row)"
+    				width="220"
+    				confirm-button-text="确认"
+    				cancel-button-text="取消"
+    				:icon="InfoFilled"
+    				icon-color="#626AEF"
+    				title="您确定删除该项吗?"
+  				>
+    				<template #reference>
+     		 		<el-button
+          				link
+          				type="danger"
+          				size="small"
+        			>删除</el-button>
+    				</template>
+  			</el-popconfirm>
+        
       </template>
     </el-table-column>
   </el-table>
