@@ -11,10 +11,6 @@ import Chart from './chart/index.vue'
 </template>
 
 <style scoped>
-.wrapper {
-  overflow: auto;
-}
-
 .card {
   width: 100%;
   display: flex;

@@ -14,7 +14,7 @@ export const option = {
 		{ type: "category", gridIndex: 1 },
 	],
 	yAxis: [{ gridIndex: 0 }, { gridIndex: 1 }],
-	grid: [{ bottom: "55%" }, { top: "55%" }],
+	grid: [{ bottom: "100%" }, { top: "100%" }],
 	series: [
 		// These series are in the second grid.
 		{ type: "bar", xAxisIndex: 1, yAxisIndex: 1 },

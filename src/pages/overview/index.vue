@@ -10,7 +10,7 @@ import TaskProcess from './components/task-process/index.vue'
 import TaskDetail from './components/task-detail/index.vue'
 
 import { onMounted } from 'vue'
-import { getMapData} from '@/apis/map'
+import { getMapData } from '@/apis/map'
 
 
 const getMapData = async () => {
@@ -36,7 +36,10 @@ onMounted(() => {
       <Map></Map>
       <BizType></BizType>
     </div>
-    <div class="right">右边</div>
+    <div class="right">
+      <TaskProcess></TaskProcess>
+      <TaskDetail></TaskDetail>
+    </div>
   </div>
 </template>
 
@@ -54,16 +57,16 @@ onMounted(() => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   gap: 12px;
   margin: 0 12px;
 }
+
+
 
 .center {
   flex: 2;
 }
 
-.right {
-  background-color: antiquewhite;
-}
+.right {}
 </style>

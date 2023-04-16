@@ -4,18 +4,12 @@ import Chart from './chart/index.vue'
 
 <template>
   <div class="wrapper">
-    <el-card class="card">
+    <el-card>
       <Chart></Chart>
     </el-card>
   </div>
 </template>
 
 <style scoped>
-.wrapper {
-  display: flex;
-}
-
-.card {
-  width: 100%;
-}
+.wrapper {}
 </style>
