@@ -45,7 +45,7 @@ const handleChange1 = (value: number) => {
     </el-table-column>
 
     <el-table-column prop="OP" label="操作" width="200">
-      <el-upload v-model:file-list="fileList" ref="uploadRef" class="upload-demo"
+      <el-upload :show-file-list="false" v-model:file-list="fileList" ref="uploadRef" class="upload-demo"
         action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :auto-upload="false">
         <template #trigger>
           <el-button @change="handleChange1">上传文件</el-button>
