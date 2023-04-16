@@ -4,10 +4,16 @@ import Chart from './chart/index.vue'
 
 <template>
   <div class="wrapper">
-    <el-card>
+    <el-card class="card">
       <Chart></Chart>
     </el-card>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.wrapper {}
+
+.card {
+  width: 100%;
+}
+</style>

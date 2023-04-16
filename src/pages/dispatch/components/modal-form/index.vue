@@ -1,17 +1,17 @@
-<script setup lang="ts">import { ref, Ref } from 'vue';
-const props = defineProps<{ 
-  modalFormProps: { 
-    isVisible: boolean, 
-    title: string 
-  }}>()
+<script setup lang="ts">
+import { ref, Ref } from 'vue';
+const props = defineProps<{
+  modalFormProps: {
+    isVisible: boolean,
+    title: string
+  }
+}>()
 </script>
 
 
 <template>
-  <el-dialog 
-  v-model="props.modalFormProps.isVisible" 
-  :title="props.modalFormProps.title" 
-  :before-close="() => props.modalFormProps.isVisible = false">
+  <el-dialog v-model="props.modalFormProps.isVisible" :title="props.modalFormProps.title"
+    :before-close="() => props.modalFormProps.isVisible = false" destroy-on-close>
     <slot />
   </el-dialog>
 </template>

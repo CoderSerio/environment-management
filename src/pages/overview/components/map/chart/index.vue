@@ -2,7 +2,7 @@
 import { getMapData } from '@/apis/map';
 import * as echarts from 'echarts'
 import { ref, defineProps, watch, onMounted } from 'vue'
-
+import { option } from './config';
 const eChartRef = ref<HTMLElement>()
 const isShow = ref(false)
 const isLoading = ref(false)
@@ -43,7 +43,15 @@ onMounted(() => {
 })
 
 // const echartsData = defineProps<{ data: Record<string, any> }>()
+// watch(echartsData, () => {
+// })
+
 onMounted(() => {
+  eChartInstance = echarts?.init(eChartRef.value as HTMLElement)
+  eChartInstance?.setOption(option)
+  window.addEventListener('resize', () => {
+    eChartInstance?.resize()
+  })
 })
 </script>
 

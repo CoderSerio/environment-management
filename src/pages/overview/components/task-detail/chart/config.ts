@@ -1,7 +1,3 @@
-import { resolveDirective } from "vue";
-
-color: ["green", "red"];
-
 export const option = {
 	// tooltip: {
 	// 	trigger: "item",
@@ -26,7 +22,7 @@ export const option = {
 					show: true,
 					position: "center",
 					color: "#4c4a4a",
-					formatter: "{total|" + "设备" + "}" + "\n\r" + "175",
+					formatter: "{total|" + "类型" + "}" + "\n\r" + "175",
 					rich: {
 						total: {
 							fontSize: 18,
