@@ -1,35 +1,39 @@
 const colors = ["#5470C6", "#EE6666", "#EE6666"];
 
 export const option = {
-	// tooltip: {
-	// 	trigger: "item",
-	// },
-	// legend: {
-	// 	top: "5%",
-	// 	left: "center"	,
-	// 	// doesn't perfectly work with our tricks, disable it
-	// 	selectedMode: false,
-	// },
+	tooltip: {
+		trigger: 'item'
+	},
+	legend: {
+		top: '40%',
+		left: '80%',
+	},
 	series: [
 		{
-			type: "pie",
-			radius: ["40%", "70%"],
-			center: ["50%", "50%"],
-			// adjust the start angle
-			startAngle: 180,
-			// label: {
-			// 	show: true,
-			// 	formatter(param: any) {
-			// 		return param.name + " (" + param.percent * 2 + "%)";
-			// 	},
-			// },
+			name: '人员统计',
+			type: 'pie',
+			radius: ['40%', '70%'],
+			center: ['50%', '60%'],
+			avoidLabelOverlap: false,
+			label: {
+				show: false,
+				position: 'center'
+			},
+			emphasis: {
+				label: {
+					show: true,
+					fontSize: 18,
+					fontWeight: 'bold'
+				}
+			},
+			labelLine: {
+				show: false
+			},
 			data: [
-				{ value: 1048, name: "Search Engine" },
-				{ value: 735, name: "Direct" },
-				{ value: 580, name: "Email" },
-				{ value: 484, name: "Union Ads" },
-				{ value: 300, name: "Video Ads" },
-			],
-		},
-	],
+				{ value: 660, name: '工勤岗位' },
+				{ value: 500, name: '技术岗位' },
+				{ value: 155, name: '管理岗位' },
+			]
+		}
+	]
 };

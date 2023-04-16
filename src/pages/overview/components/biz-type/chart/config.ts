@@ -1,25 +1,19 @@
 export const option = {
-	legend: {},
-	tooltip: {},
-	dataset: {
-		source: [
-			["product", "2012", "2013", "2014", "2015"],
-			["Matcha Latte", 41.1, 30.4, 65.1, 53.3],
-			["Milk Tea", 86.5, 92.1, 85.7, 83.1],
-			["Cheese Cocoa", 24.1, 67.2, 79.5, 86.4],
-		],
+	xAxis: {
+		type: 'category',
+		data: ['类别1', '类别2', '类别3', '类别4', '类别5', '类别6', '类别7', '类别8']
 	},
-	xAxis: [
-		{ type: "category", gridIndex: 0 },
-		{ type: "category", gridIndex: 1 },
-	],
-	yAxis: [{ gridIndex: 0 }, { gridIndex: 1 }],
-	grid: [{ bottom: "55%" }, { top: "55%" }],
+	yAxis: {
+		type: 'value'
+	},
 	series: [
-		// These series are in the second grid.
-		{ type: "bar", xAxisIndex: 1, yAxisIndex: 1 },
-		{ type: "bar", xAxisIndex: 1, yAxisIndex: 1 },
-		{ type: "bar", xAxisIndex: 1, yAxisIndex: 1 },
-		{ type: "bar", xAxisIndex: 1, yAxisIndex: 1 },
-	],
+		{
+			data: [234, 145, 478, 458, 167, 245, 267, 347],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}
+	]
 };
