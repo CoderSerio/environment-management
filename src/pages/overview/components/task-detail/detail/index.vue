@@ -1,10 +1,11 @@
+<script setup lang="ts">
+import TaskDetail from '../chart/index.vue'
+</script>
+
 <template>
-  <div class="title">
-    金牛区各类型任务详情
-  </div>
   <div class="detail">
     <div v-for="i in 6" class="detail-item">
-      {{ i }}
+      <TaskDetail></TaskDetail>
     </div>
   </div>
 </template>
@@ -17,7 +18,7 @@
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  height: 220px;
+  height: 260px;
 }
 
 .detail-item {

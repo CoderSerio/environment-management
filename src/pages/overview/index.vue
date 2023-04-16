@@ -65,8 +65,10 @@ onMounted(() => {
 
 
 .center {
-  flex: 2;
+  flex: 3;
 }
 
-.right {}
+.right {
+  flex: 1;
+}
 </style>
