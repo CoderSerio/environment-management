@@ -19,6 +19,7 @@ const activeName = ref('1')
       <Demo1 />
       <Demo2 />
       <Demo3 />
+      <Demo4 />
     </el-tab-pane>
     <el-tab-pane label="组件请放到这里" name="2">
       <Ataskorder />

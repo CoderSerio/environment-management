@@ -1,9 +1,13 @@
-<script lang="ts" setup>
-
+<script setup lang="ts">
+import Detail from './detail/index.vue'
 </script>
 
 <template>
-  xx区任务详情
+  <div>
+    <el-card>
+      <Detail></Detail>
+    </el-card>
+  </div>
 </template>
 
 <style scoped></style>
