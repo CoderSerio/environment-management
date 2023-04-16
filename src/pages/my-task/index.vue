@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-
+import SubmissionTable from './components/submission-table/index.vue'
 </script>
 
 <template>
-  这是一个给你cv用的基础板子
+  <SubmissionTable></SubmissionTable>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

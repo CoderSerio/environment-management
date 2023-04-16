@@ -96,9 +96,9 @@ const gridData = [
 
 <template>
     <el-table :data="tableData" stripe style="width: 100%">
-        <el-table-column prop="pointName" label="点位名称" width="180" />
-        <el-table-column prop="programName" label="项目" width="180" />
-        <el-table-column prop="taskDetails" label="任务明细" width="100">
+        <el-table-column prop="pointName" label="点位名称" />
+        <el-table-column prop="programName" label="项目" />
+        <el-table-column prop="taskDetails" label="任务明细">
             <template #default="scope">
                 <el-button text @click="dialogTableVisible = true">
                     查看明细

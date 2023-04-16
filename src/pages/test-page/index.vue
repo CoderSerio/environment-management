@@ -25,10 +25,7 @@ const activeName = ref('1')
       <verify />
       <CTaskSubmission />
       <map1 />
-
-      <!-- <Ataskorder /> -->
       <Demo4 />
-      <!-- <verify /> -->
     </el-tab-pane>
   </el-tabs>
 </template>
