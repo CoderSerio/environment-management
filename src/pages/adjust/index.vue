@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-
+import AdjustTable from './components/adjust-table/index.vue'
 </script>
 
 <template>
-  这是一个给你cv用的基础板子
+  <AdjustTable />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
