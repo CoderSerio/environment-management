@@ -6,7 +6,7 @@ import { useUserStore } from '@/stores'
 const userStore = useUserStore()
 
 
-function rightControl(item) {
+function rightControl(item: any) {
   //不需要权限的页面
   if (+USER_LEVEL[item.rightControl] == 0) return true
   if (item.name == '我的任务' && userStore.getUser.level !== 10) return false
