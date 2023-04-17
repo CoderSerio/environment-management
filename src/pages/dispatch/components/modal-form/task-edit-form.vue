@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { FormInstance } from 'element-plus/es/components/form';
+import { FormInstance } from 'element-plus';
 import { reactive, ref, watch } from 'vue'
 import { TABLE_NAME } from '../../type';
 import { ContaminantTableColumns } from '../contaminant-table/config';
@@ -37,7 +37,6 @@ const onSubmit = async () => {
   // })
 }
 
-console.log('jesus??', props.taskEditFormProps.tableName)
 </script>
 
 <template>
