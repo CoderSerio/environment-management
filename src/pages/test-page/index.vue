@@ -9,7 +9,7 @@ import CTaskSubmission from '@/pages/common/CTaskSubmission/index.vue'
 import map1 from '@/pages/common/map/index.vue'
 import { ref } from 'vue';
 
-import { uploadTaskFile } from '@/apis/level-a'
+import { uploadFile } from '@/apis/level-a'
 
 
 const activeName = ref('1')
@@ -34,7 +34,7 @@ const activeName = ref('1')
     </el-tab-pane>
 
     <el-tab-pane label="接口测试请到这里" name="3">
-      <el-button @click="uploadTaskFile" type="primary">A级用户文件上传测试</el-button>
+      <el-button @click="uploadFile" type="primary">A级用户文件上传测试</el-button>
     </el-tab-pane>
   </el-tabs>
 </template>

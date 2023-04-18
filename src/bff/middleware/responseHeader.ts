@@ -5,7 +5,6 @@ const responseHeader = (req: Request, res: Response, next: NextFunction) => {
 
 	// 若没有手动设置，则为通配符
 	const allowOrigin = origin || Origin || referer || Referer || "*";
-
 	// 允许请求源
 	res.header("Access-Control-Allow-Origin", allowOrigin);
 	// 允许头部字段
