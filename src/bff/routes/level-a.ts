@@ -3,11 +3,6 @@ import { readTaskListData, writeTaskListData } from "../utils/file";
 
 const levelA = express.Router();
 
-// 测试1
-levelA.get("/test", (request: Request, response: Response) => {
-	response.send("test!!!");
-});
-
 // 任务文件上传
 levelA.get("/upload-task-file", (request, response) => {
 	const binaryData = readTaskListData();
@@ -23,6 +18,15 @@ levelA.get("/upload-task-file", (request, response) => {
 	data.push(demo);
 	writeTaskListData(JSON.stringify(data));
 	console.log(data);
+	response.send(
+		JSON.stringify({
+			code: 0,
+		})
+	);
+});
+
+levelA.get("/test", (request: Request, response: Response) => {
+	response.send("这是响应的内容");
 });
 
 export default levelA;
