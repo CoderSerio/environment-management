@@ -10,8 +10,7 @@ const value = ref("");
 <template>
   <el-row :gutter="20">
     <el-col :span="5">
-      <el-select v-model="" filterable placeholder="全部/待审核/通过/打回">
-
+      <el-select v-model="value" filterable placeholder="全部/待审核/通过/打回">
 
         <el-option v-for="item in cities" :key="item.value" :label="item.label" :value="item.value">
           <span style="float: left">{{ item.label }}</span>

@@ -32,7 +32,7 @@ export const columns = [
 	{ label: "关联文件", prop: "fileId" },
 	{ label: "类别", prop: "class", render: (cell: Array<string>) => cell?.join("、") },
 	{ label: "点位名称", prop: "pointName" },
-	{ label: "GPS", prop: "gps" },
+	{ label: "GPS", prop: "gps", render: (cell: Array<string>) => "1" },
 	{ label: "项目", prop: "program" },
 	{ label: "承担单位", prop: "undertakenOrganization" },
 	{ label: "频次", prop: "frequency" },

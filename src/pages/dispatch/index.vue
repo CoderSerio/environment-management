@@ -54,11 +54,13 @@ onMounted(() => {
     <el-tabs v-model="activeTabName" class="demo-tabs" @tab-click="handleClick">
       <el-tab-pane label="污染物任务" :name="TABLE_NAME.CONTAMINANT">
         <ContaminantTable :fileIds="data.fileIds"
-          :tableData="data.taskListTableData.filter((item) => item?.type == TABLE_NAME.CONTAMINANT)" />
+          :tableData="data.taskListTableData.filter((item) => item?.type == TABLE_NAME.CONTAMINANT)"
+          :refreshData="refreshTableData" />
       </el-tab-pane>
       <el-tab-pane label="环境质量监测任务" :name="TABLE_NAME.ENV_QUALITY">
         <EnvQualityTable :fileIds="data.fileIds"
-          :tableData="data.taskListTableData.filter((item) => item?.type == TABLE_NAME.ENV_QUALITY)" />
+          :tableData="data.taskListTableData.filter((item) => item?.type == TABLE_NAME.ENV_QUALITY)"
+          :refreshData="refreshTableData" />
       </el-tab-pane>
     </el-tabs>
   </template>

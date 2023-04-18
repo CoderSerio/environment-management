@@ -27,9 +27,9 @@ levelB.post("/create-task", (request, response) => {
 		from: "B456",
 		status: 1,
 		to: "", // 为空就代表还没下发
-		data: params?.fileData,
+		data: { ...params?.fileData, taskId: id },
 	};
-	// 如果已经存在就覆盖
+	// TODO: 如果已经存在就覆盖————现在这个逻辑要改，改为传参判断
 	const existedIndex = data.find((item: any) => item.taskId === id);
 	if (existedIndex >= 0) {
 		data[existedIndex] = demo;
@@ -88,15 +88,24 @@ levelB.get("/dispatch-task", (request, response) => {
 	const queryPair = getQueryPair(request.url);
 	const binaryData = readTaskListData();
 	const data = JSON.parse(binaryData);
-	const newData = data.map((item: any) =>
-		item?.fileId == queryPair.fileId
-			? {
-					...item,
-					to: "789",
-			  }
-			: item
-	);
+	const newData = data.map((item: any) => {
+		const newItem =
+			item?.taskId == queryPair.taskId
+				? {
+						...item,
+						to: "789C",
+				  }
+				: item;
+		newItem.data.to = "789C";
+		return newItem;
+	});
 	writeTaskListData(JSON.stringify(newData));
+	response.send(
+		JSON.stringify({
+			status: 200,
+			msg: "",
+		})
+	);
 });
 
 export default levelB;

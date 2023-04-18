@@ -13,7 +13,8 @@ const props = defineProps<{
     defaultFormData: Record<string, any>,
     close: () => void
   }
-  fileIds: Array<string>
+  fileIds: Array<string>,
+  refreshData: () => void
 }>()
 
 const formRef = ref<FormInstance>()
@@ -29,15 +30,13 @@ const onSubmit = async () => {
   // 如果有默认值，说明这是修改操作; 否则即为新增
   if (Object.keys(props?.taskEditFormProps?.defaultFormData).length) {
     const index = props.taskEditFormProps.index
-    // TODO:
-
     props.taskEditFormProps.tableData[index] = { ...form.value }
   } else {
     props.taskEditFormProps.tableData.unshift({ ...form.value })
   }
   await createTask({ fileId: form?.value?.fileId, userId: '', type: props.taskEditFormProps.tableName, fileData: form?.value })
   props.taskEditFormProps.close()
-
+  props.refreshData()
   // }
   // })
 }
@@ -68,11 +67,11 @@ const onSubmit = async () => {
     </el-form-item>
 
     <!-- <el-form-item label="GPS" v-if="props.taskEditFormProps.tableName === TABLE_NAME.ENV_QUALITY" required>
-                  <el-select v-model="form.gps" placeholder="请选择GPS">
-                    <el-option label="GPS1" value="1" />
-                    <el-option label="GPS2" value="1" />
-                  </el-select>
-                </el-form-item> -->
+                          <el-select v-model="form.gps" placeholder="请选择GPS">
+                            <el-option label="GPS1" value="1" />
+                            <el-option label="GPS2" value="1" />
+                          </el-select>
+                        </el-form-item> -->
 
 
     <el-form-item label="类别" required>

@@ -35,7 +35,7 @@ export const getFileList = async () => {
 
 /** B下发任务 */
 export const dispatchTask = async (params: { taskId: string; userId: string }) => {
-	const res = await request.get("/b/dispatch-task");
+	const res = await request.get(`/b/dispatch-task?taskId=${params.taskId}&userId=${params.userId}`);
 	console.log(res);
 	return res;
 };

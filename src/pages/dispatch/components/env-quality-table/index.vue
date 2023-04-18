@@ -4,15 +4,16 @@ import { MOCK_DATA, columns, EnvQualityTableColumns } from "./config";
 import ModalForm from '../modal-form/index.vue'
 import TaskEditForm from '../modal-form/task-edit-form.vue'
 import { TABLE_NAME } from "../../type";
-import { getTaskList } from "@/apis/level-b";
+import { dispatchTask, getTaskList } from "@/apis/level-b";
 import { Task } from "@/types";
+import { ElMessage } from "element-plus";
 
 // 当前组件自身需要的数据
 const data = reactive({
   tableData: [...MOCK_DATA]
 })
 
-const { fileIds, tableData } = defineProps<{ fileIds: Array<string>, tableData: Array<Task> }>()
+const { fileIds, tableData, refreshData } = defineProps<{ fileIds: Array<string>, tableData: Array<Task>, refreshData: () => void }>()
 
 // 弹窗组件需要的参数
 const modalFormProps = reactive({
@@ -30,31 +31,27 @@ const taskEditFormProps = reactive({
   close: () => modalFormProps.isVisible = false
 })
 
-
-const handleDispatch = (index: number, row: EnvQualityTableColumns) => {
-  console.log(index, row);
+const handleDispatch = async (index: number, row: Task) => {
+  await dispatchTask({ taskId: row?.taskId, userId: '' })
+  ElMessage({
+    type: "success",
+    message: `下发成功`,
+  });
+  refreshData()
 };
 const handleAdd = () => {
   modalFormProps.isVisible = true
   taskEditFormProps.defaultFormData = {}
 }
-const handleEdit = (index: number, row: EnvQualityTableColumns) => {
+const handleEdit = (index: number, row: Task) => {
   modalFormProps.isVisible = true
   taskEditFormProps.defaultFormData = { ...row }
   taskEditFormProps.index = index
 };
-const handleDelete = (index: number, row: EnvQualityTableColumns) => {
+const handleDelete = (index: number, row: Task) => {
   data.tableData.splice(index, 1)
 };
 
-const refreshData = async () => {
-  const res = await getTaskList()
-  console.log('res环境', res)
-}
-
-onMounted(() => {
-  refreshData()
-})
 
 </script>
 
@@ -64,7 +61,7 @@ onMounted(() => {
   </div>
 
   <ModalForm :modalFormProps="modalFormProps">
-    <TaskEditForm :taskEditFormProps="taskEditFormProps" :fileIds="fileIds" />
+    <TaskEditForm :taskEditFormProps="taskEditFormProps" :fileIds="fileIds" :refreshData="refreshData" />
   </ModalForm>
 
   <el-table :data="tableData" style="width: 100%">
@@ -76,8 +73,8 @@ onMounted(() => {
 
     <el-table-column label="操作" width="200">
       <template #default="scope">
-        <el-popconfirm @confirm="handleDispatch(scope.$index, scope.row)" width="220" confirm-button-text="确认"
-          cancel-button-text="取消" icon-color="#626AEF" title="您确定下发该项吗?">
+        <el-popconfirm v-if="!scope.row.to" @confirm="handleDispatch(scope.$index, scope.row)" width="220"
+          confirm-button-text="确认" cancel-button-text="取消" icon-color="#626AEF" title="您确定下发该项吗?">
           <template #reference>
             <el-button size="small">下发</el-button>
           </template>
