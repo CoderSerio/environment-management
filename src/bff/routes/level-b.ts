@@ -156,4 +156,71 @@ levelB.get("/task-pass", (request, response) => {
 		})
 	);
 });
+
+//任务删除(没测过)
+levelB.get("/delete-task", (request, response) => {
+	const binaryData = readFileListData();
+	const data = JSON.parse(binaryData.toString());
+	const queryPair = getQueryPair(request.url);
+	const num = data.findIndex((obj: any) => {
+		return obj.taskId === queryPair.taskId;
+	});
+
+	data.splice(num, 1);
+
+	writeTaskListData(JSON.stringify(data));
+
+	response.send(
+		JSON.stringify({
+			status: 200,
+			msg: "",
+		})
+	);
+});
+
+//查看进度列表(copy a的应该过了吧)
+levelB.get("/get-task-progress", (request, response) => {
+	const binaryData = readFileListData();
+	const data = JSON.parse(binaryData.toString());
+	const queryPair = getQueryPair(request.url);
+	const newdata = data.filter((obj: any) => {
+		return obj.from === queryPair.from;
+	});
+	
+	response.send(
+		JSON.stringify({
+			status: 200,
+			msg: "",
+			data: {
+				hasMore: true,
+				total: 100,
+				list: newdata,
+			},
+		})
+	);
+});
+
+//b审核c的提交(没测过)
+levelB.get("/task-pass", (request, response) => {
+	const binaryData = readFileListData();
+	const data = JSON.parse(binaryData.toString());
+	const queryPair = getQueryPair(request.url);
+	//queryPair.passanswer = "true";
+	//我们假设通过为true，可能会有两个按钮，我们假设按钮传进来的值为passanswer
+	const num = data.findIndex((obj: any) => {
+		return obj.taskId === queryPair.taskId;
+	});
+
+	if (queryPair.passanswer === "true"){
+		data[num].status += 1;
+	}
+
+	writeTaskListData(JSON.stringify(data));
+	response.send(
+		JSON.stringify({
+			status: 200,
+			msg: "",
+		})
+	);
+});
 export default levelB;
