@@ -1,15 +1,1 @@
-[
-	{
-		"taskId": "1",
-		"fileId": "123",
-		"totalTimes": "100",
-		"currentTimes": "10",
-		"status": "1",
-		"form": "B456",
-		"to": "C789",
-		"type": "1",
-		"data": {
-			"title": "这是任务内容示意"
-		}
-	}
-]
+[]

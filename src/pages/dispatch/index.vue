@@ -7,7 +7,9 @@ import { USER_LEVEL } from '@/type'
 import type { TabsPaneContext } from 'element-plus'
 import ATaskOrder from "@/pages/common/ATaskOrder/index.vue"
 import { useUserStore } from '@/stores';
-import { ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
+import { getFileList } from '@/apis/level-b'
+import { TaskFile } from '@/types'
 const activeTabName = ref(TABLE_NAME.CONTAMINANT)
 
 const userStore = useUserStore()
@@ -17,15 +19,31 @@ const isB = userStore.user.level === USER_LEVEL.RIGHT_CONTROL_READ_MID
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)
 }
+
+const data: { fileListTableData: Array<TaskFile> } = reactive({
+  fileListTableData: []
+})
+
+const refreshTableData = async () => {
+  const res = await getFileList()
+  console.log('res', res)
+  data.fileListTableData = [...res.data?.list]
+}
+
+
+onMounted(() => {
+  refreshTableData()
+})
+
 </script>
 
 <template>
   <template v-if="isA">
-    <ATaskOrder v-show="isA" />
+    <ATaskOrder v-show="isA" :tableData="data.fileListTableData" />
   </template>
   <template v-else-if="isB">
     <h3>任务文件列表</h3>
-    <TaskOrderTable />
+    <TaskOrderTable :tableData="data.fileListTableData" />
     <h3 style="margin-top: 32px;">任务下发</h3>
     <el-tabs v-model="activeTabName" class="demo-tabs" @tab-click="handleClick">
       <el-tab-pane label="污染物任务" :name="TABLE_NAME.CONTAMINANT">
