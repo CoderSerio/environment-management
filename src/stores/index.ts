@@ -1,30 +1,29 @@
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import {User } from "@/type";
 
-export enum USER_LEVEL {
-	"A" = 10,
-	"B" = 20,
-	"C" = 30,
+
+const userNone:User={
+	id:'未登录',
+	level:0
 }
-
-export type User = {
-	id?: string;
-	level?: USER_LEVEL;
-};
-
+// 获取持久化状态
+const defaultUser =JSON.parse(window.sessionStorage.getItem('userInfo')|| JSON.stringify(userNone)) 
 /** 获得全局状态 */
-export const useUserStore = defineStore("user", () => {
-	/** 当前登录的用户信息 */
-	const user = reactive<User>({});
-
-	/** 更新当前登录的用户信息 */
-	const updateUser = (info: User) => {
-		user.id = info?.id;
-		user.level = info?.level;
-	};
-
-	return {
-		user,
-		updateUser,
-	};
-});
+export const useUserStore = defineStore("user", {
+	state:()=>({
+		user:defaultUser as User
+	}),
+	getters:{
+		getUser(state){
+			return state.user
+		}
+	},
+	actions:{
+		setUser(val:User){
+			// 持久化存储
+			console.log(JSON.stringify(val))
+			window.sessionStorage.setItem('userInfo',JSON.stringify(val))
+			this.$state.user = val
+		}
+	}
+})
