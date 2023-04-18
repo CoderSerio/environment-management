@@ -27,8 +27,8 @@ router.beforeEach((to, from, next) => {
 	// }else{
 	routes.find((item) => {
 		if (item.path == to.path) {
-			console.log(USER_LEVEL[+item.rightControl], userStore.getUser);
-			if (USER_LEVEL[item.rightControl] > userStore.getUser.level) {
+			// console.log(USER_LEVEL[+item.rightControl], userStore.getUser);
+			if (Number(USER_LEVEL[+item.rightControl]) > Number(userStore.getUser.level)) {
 				ElMessage.warning("抱歉，用户权限不足");
 				next("/");
 			} else {

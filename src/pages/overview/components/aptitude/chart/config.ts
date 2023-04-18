@@ -1,27 +1,30 @@
 export const option = {
-	title: {
-		text: "Referer of a Website",
-		subtext: "Fake Data",
-		left: "center",
-	},
+	// title: {
+	// 	text: "Referer of a Website",
+	// 	left: "center",
+	// },
 	tooltip: {
 		trigger: "item",
 	},
 	legend: {
 		orient: "vertical",
-		left: "left",
+		left: "76%",
+		top: '20%',
 	},
 	series: [
 		{
-			name: "Access From",
+			name: "资质能力统计",
 			type: "pie",
-			radius: "50%",
+			radius: '50%',
+			center: ['47%', '50%'],
+			formatter: '{b}\n{d}%',
 			data: [
-				{ value: 1048, name: "Search Engine" },
-				{ value: 735, name: "Direct" },
-				{ value: 580, name: "Email" },
-				{ value: 484, name: "Union Ads" },
-				{ value: 300, name: "Video Ads" },
+				{ value: 45, name: "固体废物" },
+				{ value: 18, name: "土壤和水系沉积物" },
+				{ value: 8, name: "水和废水" },
+				{ value: 7, name: "环境空气和废气" },
+				{ value: 17, name: "声环境" },	
+				{ value: 5, name: "污染源" },
 			],
 			emphasis: {
 				itemStyle: {

@@ -1,32 +1,19 @@
-<script setup lang="ts" >
-import "echarts/extension-src/bmap/bmap";
-import * as echarts from 'echarts'
-import { ref, defineProps, watch, onMounted } from 'vue'
-import { option } from './config';
-
-const eChartRef = ref<HTMLElement>()
-let eChartInstance: any = null
-
-// const echartsData = defineProps<{ data: Record<string, any> }>()
-// watch(echartsData, () => {
-// })
-
-onMounted(() => {
-  eChartInstance = echarts?.init(eChartRef.value as HTMLElement)
-  eChartInstance?.setOption(option)
-  window.addEventListener('resize', () => {
-    eChartInstance?.resize()
-  })
-})
+<script lang="ts" setup>
+import { MOCK_DATA } from './config';
 </script>
 
 <template>
-  <div id="echart" ref="eChartRef"></div>
+  <div class="wrapper">
+    <div>4月各区县任务进度排名</div>
+    <el-table :data="MOCK_DATA" style="width: 100%; overflow-y: auto;">
+      <el-table-column prop="date" />
+      <el-table-column prop="name" />
+      <el-table-column prop="address" />
+    </el-table>
+  </div>
 </template>
 
-<style scoped>
-#echart {
-  width: 600px;
-  height: 600px;
-}
-</style>
+
+
+  
+  

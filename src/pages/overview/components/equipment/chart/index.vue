@@ -20,12 +20,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="echart" ref="eChartRef"></div>
+  <div>
+    <div id="echart" ref="eChartRef"></div>
+    <div class="text">
+      <div>正常 156</div>
+      <div>异常 19</div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
 #echart {
   width: 160px;
-  height: 150px;
+  height: 140px;
 }
 </style>

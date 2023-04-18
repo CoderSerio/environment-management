@@ -1,9 +1,19 @@
 <script lang="ts" setup>
-
+import Chart from './chart/index.vue'
 </script>
 
 <template>
-  成都总的任务进度统计
+  <div class="wrapper">
+    <el-card class="card">
+      <Chart></Chart>
+    </el-card>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.wrapper {}
+
+.card {
+  width: 100%;
+}
+</style>

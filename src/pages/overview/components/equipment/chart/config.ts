@@ -1,4 +1,6 @@
-const colors = ["#5470C6", "#EE6666", "#EE6666"];
+import { resolveDirective } from "vue";
+
+color: ["green", "red"];
 
 export const option = {
 	// tooltip: {
@@ -10,26 +12,44 @@ export const option = {
 	// 	// doesn't perfectly work with our tricks, disable it
 	// 	selectedMode: false,
 	// },
+
 	series: [
 		{
-			name: "Access From",
+			name: "设备统计",
 			type: "pie",
-			radius: ["40%", "70%"],
+			radius: ["50%", "70%"],
 			center: ["50%", "50%"],
 			// adjust the start angle
 			startAngle: 180,
 			label: {
-				show: true,
-				formatter(param: any) {
-					return param.name + " (" + param.percent * 2 + "%)";
+				normal: {
+					show: true,
+					position: "center",
+					color: "#4c4a4a",
+					formatter: "{total|" + "设备" + "}" + "\n\r" + "175",
+					rich: {
+						total: {
+							fontSize: 18,
+							fontFamily: "微软雅黑",
+							color: "#454c5c",
+						},
+						active: {
+							fontFamily: "微软雅黑",
+							fontSize: 16,
+							color: "#00FFF",
+							lineHeight: 30,
+						},
+					},
+				},
+				emphasis: {
+					//中间文字显示
+					show: true,
 				},
 			},
+
 			data: [
-				{ value: 1048, name: "Search Engine" },
-				{ value: 735, name: "Direct" },
-				{ value: 580, name: "Email" },
-				{ value: 484, name: "Union Ads" },
-				{ value: 300, name: "Video Ads" },
+				{ value: 156, name: "正常" },
+				{ value: 19, name: "异常" },
 			],
 		},
 	],

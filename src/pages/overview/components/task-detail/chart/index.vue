@@ -1,5 +1,4 @@
 <script setup lang="ts" >
-import "echarts/extension-src/bmap/bmap";
 import * as echarts from 'echarts'
 import { ref, defineProps, watch, onMounted } from 'vue'
 import { option } from './config';
@@ -26,7 +25,7 @@ onMounted(() => {
 
 <style scoped>
 #echart {
-  width: 600px;
-  height: 600px;
+  width: 80px;
+  height: 80px;
 }
 </style>

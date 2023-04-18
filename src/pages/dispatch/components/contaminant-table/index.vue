@@ -15,7 +15,7 @@ const modalFormProps = reactive({
 })
 
 const taskEditFormProps = reactive({
-	tableName: TABLE_NAME.ENV_QUALITY,
+	tableName: TABLE_NAME.CONTAMINANT,
 	tableData: data.tableData,
 	index: 0,
 	defaultFormData: {},
@@ -57,9 +57,23 @@ const handleDelete = (index: number, row: ContaminantTableColumns) => {
 
 		<el-table-column label="操作" width="200">
 			<template #default="scope">
-				<el-button size="small" @click="handleDispatch(scope.$index, scope.row)">下发</el-button>
+				<el-popconfirm @confirm="handleDispatch(scope.$index, scope.row)" width="220" confirm-button-text="确认"
+					cancel-button-text="取消" icon-color="#626AEF" title="您确定下发该项吗?">
+					<template #reference>
+						<el-button size="small">下发</el-button>
+					</template>
+				</el-popconfirm>
+
 				<el-button size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
-				<el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+
+				<el-popconfirm @confirm="handleDelete(scope.$index, scope.row)" width="220" confirm-button-text="确认"
+					cancel-button-text="取消" icon-color="#626AEF" title="您确定删除该项吗?">
+					<template #reference>
+						<el-button type="danger" size="small">删除</el-button>
+					</template>
+				</el-popconfirm>
+
+
 			</template>
 		</el-table-column>
 	</el-table>
