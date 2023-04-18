@@ -14,7 +14,7 @@ export interface RouterConfig {
 const initRoutes = (app: Express) => {
 	// 拦截所有请求，记录一条日志之后放行
 	app.use((req, res, next) => {
-		log.info(`Request URL: ${req?.url}`);
+		log.info(`Request: ${req?.method} ${req?.url} ${req?.body}`);
 		next();
 	});
 

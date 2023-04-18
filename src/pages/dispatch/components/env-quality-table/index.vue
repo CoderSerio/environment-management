@@ -1,14 +1,18 @@
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import { MOCK_DATA, columns, EnvQualityTableColumns } from "./config";
 import ModalForm from '../modal-form/index.vue'
 import TaskEditForm from '../modal-form/task-edit-form.vue'
 import { TABLE_NAME } from "../../type";
+import { getTaskList } from "@/apis/level-b";
+import { Task } from "@/types";
 
 // 当前组件自身需要的数据
 const data = reactive({
   tableData: [...MOCK_DATA]
 })
+
+const { fileIds, tableData } = defineProps<{ fileIds: Array<string>, tableData: Array<Task> }>()
 
 // 弹窗组件需要的参数
 const modalFormProps = reactive({
@@ -22,6 +26,7 @@ const taskEditFormProps = reactive({
   tableData: data.tableData,
   index: 0,
   defaultFormData: {},
+  fileIds,
   close: () => modalFormProps.isVisible = false
 })
 
@@ -41,6 +46,16 @@ const handleEdit = (index: number, row: EnvQualityTableColumns) => {
 const handleDelete = (index: number, row: EnvQualityTableColumns) => {
   data.tableData.splice(index, 1)
 };
+
+const refreshData = async () => {
+  const res = await getTaskList()
+  console.log('res环境', res)
+}
+
+onMounted(() => {
+  refreshData()
+})
+
 </script>
 
 <template>
@@ -49,10 +64,10 @@ const handleDelete = (index: number, row: EnvQualityTableColumns) => {
   </div>
 
   <ModalForm :modalFormProps="modalFormProps">
-    <TaskEditForm :taskEditFormProps="taskEditFormProps" />
+    <TaskEditForm :taskEditFormProps="taskEditFormProps" :fileIds="fileIds" />
   </ModalForm>
 
-  <el-table :data="data.tableData" style="width: 100%">
+  <el-table :data="tableData" style="width: 100%">
     <el-table-column v-for="column in columns" :label="column.label" :prop="column.prop">
       <template #default="scope">
         {{ column?.render ? column.render(scope.row[column.prop]) : scope.row[column.prop] }}

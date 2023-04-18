@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { getFileList } from "@/apis/level-b";
+import { getFileList, getTaskList } from "@/apis/level-b";
 import { TaskFile } from "@/types";
 import { onMounted, reactive } from "vue";
 import { MOCK_DATA, columns } from "./config";
@@ -11,12 +11,21 @@ const handleDelete = (index: number, row: TaskFile) => {
   console.log(index, row);
 };
 
+
 const { tableData } = defineProps<{ tableData: Array<TaskFile> }>()
 
 const handlePreview = (index: number, row: TaskFile) => {
   alert(`临时弹窗：${row?.data?.title}`)
 };
 
+const refreshData = async () => {
+  const res = await getTaskList()
+  console.log('res环境观测', res)
+}
+
+onMounted(() => {
+  refreshData()
+})
 
 </script>
 

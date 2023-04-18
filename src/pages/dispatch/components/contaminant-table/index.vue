@@ -1,13 +1,18 @@
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import { MOCK_DATA, columns, ContaminantTableColumns } from "./config";
 import ModalForm from '../modal-form/index.vue'
 import { TABLE_NAME } from "../../type";
 import TaskEditForm from '../modal-form/task-edit-form.vue'
+import { createTask, getTaskList } from "@/apis/level-b";
+import { Task } from "@/types";
 
-const data = reactive({
-	tableData: [...MOCK_DATA]
+const { fileIds, tableData } = defineProps<{ fileIds: Array<string>, tableData: Array<Task> }>()
+
+const data: { tableData: Array<Task> } = reactive({
+	tableData: []
 })
+
 
 const modalFormProps = reactive({
 	isVisible: false,
@@ -37,6 +42,16 @@ const handleEdit = (index: number, row: ContaminantTableColumns) => {
 const handleDelete = (index: number, row: ContaminantTableColumns) => {
 	data.tableData.splice(index, 1)
 };
+
+const refreshData = async () => {
+	const res = await getTaskList()
+	console.log('res污染物', res)
+}
+
+onMounted(() => {
+	refreshData()
+})
+
 </script>
 
 <template>
@@ -45,10 +60,10 @@ const handleDelete = (index: number, row: ContaminantTableColumns) => {
 	</div>
 
 	<ModalForm :modalFormProps="modalFormProps">
-		<TaskEditForm :taskEditFormProps="taskEditFormProps" />
+		<TaskEditForm :taskEditFormProps="taskEditFormProps" :fileIds="fileIds" />
 	</ModalForm>
 
-	<el-table :data="data.tableData" style="width: 100%">
+	<el-table :data="tableData" style="width: 100%">
 		<el-table-column v-for="column in columns" :label="column.label" :prop="column.prop">
 			<template #default="scope">
 				{{ column?.render ? column.render(scope.row[column.prop]) : scope.row[column.prop] }}
