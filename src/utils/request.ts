@@ -1,7 +1,9 @@
 import axios from "axios";
+import { BFF_PORT } from "@/bff/config";
 
 const instance = axios.create({
 	timeout: 6000,
+	baseURL: `${process.env.BASE_URL}:${BFF_PORT}`,
 });
 
 instance.interceptors.response.use(

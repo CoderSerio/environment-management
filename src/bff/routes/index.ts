@@ -25,7 +25,7 @@ const initRoutes = (app: Express) => {
 	app.use("/a", levelA);
 	app.use("/b", levelB);
 	app.use("/c", levelC);
-	app.use("/c", common);
+	app.use("/common", common);
 };
 
 export default initRoutes;
