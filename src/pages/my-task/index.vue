@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-<<<<<<< HEAD
 import { ElButton } from 'element-plus';
 import { toUnicode } from 'punycode';
 import { ref, shallowReactive } from 'vue'
@@ -122,13 +121,3 @@ function show(item){
     margin: 0 auto;
   }
 </style>
-=======
-import SubmissionTable from './components/submission-table/index.vue'
-</script>
-
-<template>
-  <SubmissionTable></SubmissionTable>
-</template>
-
-<style scoped></style>
->>>>>>> master
