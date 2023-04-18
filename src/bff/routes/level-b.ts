@@ -141,15 +141,14 @@ levelB.get("/task-pass", (request, response) => {
 	const queryPair = getQueryPair(request.url);
 	//queryPair.passanswer = "true";
 	//我们假设通过为true，可能会有两个按钮，我们假设按钮传进来的值为passanswer
-	const num = data.findIndex((obj: any) => {
-		return obj.taskId === queryPair.taskId;
-	});
 
 	if (queryPair.passanswer === "true"){
-		data[num].status += 1;
+		const num = data.findIndex((obj: any) => {
+			return obj.taskId === queryPair.taskId;
+		});
+		if (num != -1)data[num].status += 1;
+		writeTaskListData(JSON.stringify(data));
 	}
-
-	writeTaskListData(JSON.stringify(data));
 
 	response.send(
 		JSON.stringify({
