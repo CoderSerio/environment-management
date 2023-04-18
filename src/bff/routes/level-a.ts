@@ -108,7 +108,7 @@ levelA.get("/get-progress-list", (request, response) => {
 	const data = JSON.parse(binaryData.toString());
 	const queryPair = getQueryPair(request.url);
 	const newdata = data.filter((obj: any) => {
-		return obj.from === "A123";
+		return obj.from === queryPair.from;
 	});
 
 	
