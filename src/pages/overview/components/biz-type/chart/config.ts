@@ -1,3 +1,20 @@
+import { useUserStore } from '@/stores';
+import { watch } from 'vue';
+const userStore = useUserStore()
+let data = [234, 145, 478, 458, 167, 245, 267, 347]
+watch(
+	()=>userStore.getMap,
+	(newName,oldName)=>{
+	  data[0] = Math.round(Math.random()*300);
+	  data[1] = Math.round(Math.random()*300);
+	  data[2] = Math.round(Math.random()*300);
+	  data[3] = Math.round(Math.random()*300);
+	  data[4] = Math.round(Math.random()*300);
+	  data[5] = Math.round(Math.random()*300);
+	  data[6] = Math.round(Math.random()*300);
+	  data[7] = Math.round(Math.random()*300);
+	}
+  )
 export const option = {
 	xAxis: {
 		type: "category",
@@ -8,7 +25,7 @@ export const option = {
 	},
 	series: [
 		{
-			data: [234, 145, 478, 458, 167, 245, 267, 347],
+			data: data,
 			type: "bar",
 			showBackground: true,
 			backgroundStyle: {

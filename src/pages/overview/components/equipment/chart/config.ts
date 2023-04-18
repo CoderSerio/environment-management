@@ -1,6 +1,20 @@
-import { resolveDirective } from "vue";
-
+import { ref, resolveDirective, watch } from "vue";
+import { useUserStore } from '@/stores';
+const userStore = useUserStore()
+let mapName = userStore.getMap
+let data= [
+	{ value: 156, name: "正常" },
+	{ value: 19, name: "异常" },
+]
+watch(
+  ()=>userStore.getMap,
+  (newName,oldName)=>{
+	data[0].value = Math.round(Math.random()*175);
+	data[1].value = 175 - data[0].value
+  }
+)
 color: ["green", "red"];
+
 
 export const option = {
 	// tooltip: {
@@ -12,7 +26,6 @@ export const option = {
 	// 	// doesn't perfectly work with our tricks, disable it
 	// 	selectedMode: false,
 	// },
-
 	series: [
 		{
 			name: "设备统计",
@@ -46,11 +59,7 @@ export const option = {
 					show: true,
 				},
 			},
-
-			data: [
-				{ value: 156, name: "正常" },
-				{ value: 19, name: "异常" },
-			],
+			data: data
 		},
 	],
 };
