@@ -3,6 +3,8 @@ import { getMapData } from '@/apis/map';
 import * as echarts from 'echarts'
 import { ref, defineProps, watch, onMounted } from 'vue'
 import { option } from './config';
+import { useUserStore } from '@/stores';
+const userStore = useUserStore()
 const eChartRef = ref<HTMLElement>()
 const isShow = ref(false)
 const isLoading = ref(false)
@@ -19,6 +21,10 @@ const mapInit = async (name: string) => {
       type: 'map',
       map: 'mapData'
     }],
+    title: {
+          text: '成都市环境检测系统',
+          subtext: '各区'
+    },
   })
   isLoading.value = false
 }
@@ -26,6 +32,7 @@ const mapInit = async (name: string) => {
 function goBack() {
   isShow.value = false
   mapInit("成都市")
+  userStore.setMap("成都市")
 }
 
 onMounted(() => {
@@ -35,6 +42,7 @@ onMounted(() => {
     if (!isLoading.value) {
       mapInit(params.name)
       isShow.value = true
+      userStore.setMap(params.name)
     }
   })
   window.addEventListener('resize', () => {
@@ -72,6 +80,7 @@ onMounted(() => {
 .btn {
   position: absolute;
   z-index: 100;
+  left: 80%;
 }
 
 #echart {
