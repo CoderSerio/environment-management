@@ -7,12 +7,17 @@ import Demo4 from '@/pages/common/demo4/index.vue'
 import verify from '@/pages/common/verify/index.vue'
 import CTaskSubmission from '@/pages/common/CTaskSubmission/index.vue'
 import map1 from '@/pages/common/map/index.vue'
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 
-import { uploadFile } from '@/apis/level-a'
+import { getFileList, uploadFile, dispatchFile } from '@/apis/level-a'
 
 
-const activeName = ref('1')
+const activeName = ref('3')
+// 用来指定各种参数
+const params = reactive({
+  fileId: '0',
+  taskId: '0',
+})
 </script>
 
 <template>
@@ -34,7 +39,16 @@ const activeName = ref('1')
     </el-tab-pane>
 
     <el-tab-pane label="接口测试请到这里" name="3">
-      <el-button @click="uploadFile" type="primary">A级用户文件上传测试</el-button>
+      <div style="margin:20px">
+        <div>这里可以输入参数</div>
+        <div>fileId: <input v-model="params.fileId"></div>
+        <div>taskId: <input v-model="params.taskId"></div>
+      </div>
+
+      <el-button @click="uploadFile" type="primary">A文件上传</el-button>
+      <el-button @click="getFileList" type="primary">A查看文件列表</el-button>
+      <el-button @click="dispatchFile({ fileId: params.fileId, userId: '' })" type="primary">A下发任务</el-button>
+
     </el-tab-pane>
   </el-tabs>
 </template>

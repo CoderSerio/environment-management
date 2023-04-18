@@ -18,15 +18,12 @@ levelB.get("/create-task", (request, response) => {
 	// TODO: 先随便写点吧
 	const id = Math.floor(1000 * Math.random());
 	const demo = {
-		name: id,
-		info: {
-			fileId: id,
-			fileName: `测试文件${id}`,
-			from: "B456",
-			to: "", // 为空就代表还没下发
-			data: {
-				title: "这是任务内容示意, 文件格式待定——确定后再补充相关功能",
-			},
+		fileId: id,
+		fileName: `测试文件${id}`,
+		from: "B456",
+		to: "", // 为空就代表还没下发
+		data: {
+			title: "这是任务内容示意, 文件格式待定——确定后再补充相关功能",
 		},
 	};
 
@@ -83,7 +80,7 @@ levelB.get("/dispatch-task", (request, response) => {
 	const binaryData = readTaskListData();
 	const data = JSON.parse(binaryData);
 	const newData = data.map((item: any) =>
-		item?.fileId == queryPair.file_id
+		item?.fileId == queryPair.fileId
 			? {
 					...item,
 					to: "789",
