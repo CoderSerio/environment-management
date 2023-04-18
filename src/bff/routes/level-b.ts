@@ -90,7 +90,7 @@ levelB.get("/dispatch-task", (request, response) => {
 	writeTaskListData(JSON.stringify(newData));
 });
 
-//任务删除(没测过)
+//任务删除(过)
 levelB.get("/delete-task", (request, response) => {
 	const binaryData = readFileListData();
 	const data = JSON.parse(binaryData.toString());
@@ -99,7 +99,7 @@ levelB.get("/delete-task", (request, response) => {
 		return obj.taskId === queryPair.taskId;
 	});
 
-	data.splice(num, 1);
+	if (num != -1)data.splice(num, 1);
 
 	writeTaskListData(JSON.stringify(data));
 
@@ -107,6 +107,7 @@ levelB.get("/delete-task", (request, response) => {
 		JSON.stringify({
 			status: 200,
 			msg: "",
+			data: data,
 		})
 	);
 });
@@ -149,10 +150,12 @@ levelB.get("/task-pass", (request, response) => {
 	}
 
 	writeTaskListData(JSON.stringify(data));
+
 	response.send(
 		JSON.stringify({
 			status: 200,
 			msg: "",
+			date: data,
 		})
 	);
 });

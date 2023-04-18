@@ -80,7 +80,7 @@ levelA.get("/test", (request: Request, response: Response) => {
 });
 
 
-//文件删除(没测过)
+//文件删除(过)
 levelA.get("/delete-file", (request, response) => {
 	const binaryData = readFileListData();
 	const data = JSON.parse(binaryData.toString());
@@ -89,7 +89,7 @@ levelA.get("/delete-file", (request, response) => {
 		return obj.fileId === queryPair.fileId;
 	});
 
-	data.splice(num, 1);
+	if (num != -1) data.splice(num, 1);
 
 	writeFileListData(JSON.stringify(data));
 
@@ -97,6 +97,7 @@ levelA.get("/delete-file", (request, response) => {
 		JSON.stringify({
 			status: 200,
 			msg: "",
+			data: data,
 		})
 	);
 });
