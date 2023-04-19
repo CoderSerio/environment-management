@@ -9,6 +9,7 @@ export const uploadFile = async () => {
 
 /** A查看文件列表 */
 export const getFileList = async () => {
+	console.log("你确定调的是这个？");
 	const res = await request.get("/a/get-file-list");
 	console.log(res);
 	return res;

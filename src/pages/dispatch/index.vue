@@ -8,7 +8,8 @@ import type { TabsPaneContext } from 'element-plus'
 import ATaskOrder from "@/pages/common/ATaskOrder/index.vue"
 import { useUserStore } from '@/stores';
 import { onMounted, reactive, ref } from "vue";
-import { getFileList, getTaskList } from '@/apis/level-b'
+import { getFileList as bGetFileList, getTaskList } from '@/apis/level-b'
+import { getFileList as aGetFileList } from '@/apis/level-a'
 import { Task, TaskFile } from '@/types'
 const activeTabName = ref(TABLE_NAME.CONTAMINANT)
 
@@ -20,16 +21,19 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)
 }
 
-const data: { fileListTableData: Array<TaskFile>, fileIds: Array<string>, taskListTableData: Array<Task> } = reactive({
-  fileListTableData: [],
+const data: { bFileListTableData: Array<TaskFile>, aFileListTableData: Array<TaskFile>, fileIds: Array<string>, taskListTableData: Array<Task> } = reactive({
+  bFileListTableData: [],
+  aFileListTableData: [],
   fileIds: [],
   taskListTableData: []
 })
 
 const refreshTableData = async () => {
-  const files = await getFileList()
-  data.fileListTableData = [...files.data?.list]
-  data.fileIds = files.data?.list?.map((item: TaskFile) => {
+  const bFiles = await bGetFileList()
+  const aFiles = await aGetFileList()
+  data.bFileListTableData = [...bFiles.data?.list]
+  data.aFileListTableData = [...aFiles.data?.list]
+  data.fileIds = bFiles.data?.list?.map((item: TaskFile) => {
     return item?.fileId
   })
   const tasks = await getTaskList()
@@ -45,11 +49,11 @@ onMounted(() => {
 
 <template>
   <template v-if="isA">
-    <ATaskOrder v-show="isA" :tableData="data.fileListTableData" />
+    <ATaskOrder v-show="isA" :tableData="data.aFileListTableData" :refreshData="refreshTableData" />
   </template>
   <template v-else-if="isB">
     <h3>任务文件列表</h3>
-    <TaskOrderTable :tableData="data.fileListTableData" />
+    <TaskOrderTable :tableData="data.bFileListTableData" />
     <h3 style="margin-top: 32px;">任务下发</h3>
     <el-tabs v-model="activeTabName" class="demo-tabs" @tab-click="handleClick">
       <el-tab-pane label="污染物任务" :name="TABLE_NAME.CONTAMINANT">
