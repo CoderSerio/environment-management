@@ -39,3 +39,6 @@ export const dispatchTask = async (params: { taskId: string; userId: string }) =
 	console.log(res);
 	return res;
 };
+
+/** B审核任务 */
+export const submitTask = (params: { taskId: string; adjustRes: number }) => {};

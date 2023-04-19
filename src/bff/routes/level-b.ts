@@ -27,6 +27,8 @@ levelB.post("/create-task", (request, response) => {
 		from: "B456",
 		status: 1,
 		to: "", // 为空就代表还没下发
+		currentTimes: 0,
+		frequency: params?.fileData?.frequency || 0,
 		data: { ...params?.fileData, taskId: id },
 	};
 	// TODO: 如果已经存在就覆盖————现在这个逻辑要改，改为传参判断
@@ -94,12 +96,91 @@ levelB.get("/dispatch-task", (request, response) => {
 				? {
 						...item,
 						to: "789C",
+						status: 2,
 				  }
 				: item;
 		newItem.data.to = "789C";
 		return newItem;
 	});
 	writeTaskListData(JSON.stringify(newData));
+	response.send(
+		JSON.stringify({
+			status: 200,
+			msg: "",
+		})
+	);
+});
+
+// 任务删除(过)
+levelB.get("/delete-task", (request, response) => {
+	const binaryData = readFileListData();
+	const data = JSON.parse(binaryData.toString());
+	const queryPair = getQueryPair(request.url);
+	const num = data.findIndex((obj: any) => {
+		return obj.taskId === queryPair.taskId;
+	});
+
+	if (num != -1) data.splice(num, 1);
+
+	writeTaskListData(JSON.stringify(data));
+
+	response.send(
+		JSON.stringify({
+			status: 200,
+			msg: "",
+			data: data,
+		})
+	);
+});
+
+//查看进度列表(copy a的应该过了吧)
+levelB.get("/get-task-progress", (request, response) => {
+	const binaryData = readFileListData();
+	const data = JSON.parse(binaryData.toString());
+	const queryPair = getQueryPair(request.url);
+	const newdata = data.filter((obj: any) => {
+		return obj.from === queryPair.from;
+	});
+
+	response.send(
+		JSON.stringify({
+			status: 200,
+			msg: "",
+			data: {
+				hasMore: true,
+				total: 100,
+				list: newdata,
+			},
+		})
+	);
+});
+
+//b审核c的提交(没测过)
+levelB.get("/adjust-task", (request, response) => {
+	const binaryData = readFileListData();
+	const data = JSON.parse(binaryData.toString());
+	const queryPair = getQueryPair(request.url);
+	//queryPair.passanswer = "true";
+	//我们假设通过为true，可能会有两个按钮，我们假设按钮传进来的值为passanswer
+	// dajustRes 1 通过 0 驳回
+	const index = data.findIndex((obj: any) => {
+		return obj.taskId === queryPair.taskId;
+	});
+	if (index != -1) {
+		data[index].currentTimes = +data[index].currentTimes + +queryPair.adjustRes;
+		if (+data[index].currentTimes >= +data[index].frequency) {
+			// 通过，彻底完成任务
+			data[index].status = 5;
+		} else {
+			// 通过，继续执行
+			data[index].status = 2;
+		}
+	} else {
+		// 被驳回
+		data[index].status = 3;
+	}
+	writeTaskListData(JSON.stringify(data));
+
 	response.send(
 		JSON.stringify({
 			status: 200,

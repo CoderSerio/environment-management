@@ -73,7 +73,7 @@ onMounted(() => {
     <div id="main" ref="main" class="map" style="height:600px width:100px">
     </div>
 </template>
-<style>
+<style scoped>
 .map {
     height: 600px;
     width: 600px;
