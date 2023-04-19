@@ -14,6 +14,7 @@ const handleSubmit = async (row: Task) => {
     type: "success",
     message: `提交审核成功！`,
   });
+  refreshData()
 }
 const data: { tableData: Array<Task>, modalData: Array<Task> } = reactive({
   tableData: [],
@@ -40,7 +41,7 @@ onMounted(() => {
       <template v-slot="scope">
         <div style="display: flex; gap: 10px; justify-content: flex-start;">
           <el-button @click="dialogTableVisible = !dialogTableVisible">查看</el-button>
-          <el-button @change="">上传文件</el-button>
+          <el-button @change="handleSubmit">上传文件</el-button>
           <el-button v-if="![5, 4].includes(scope.row.status)" type="primary" @click="handleSubmit(scope.row)">
             确认提交
           </el-button>

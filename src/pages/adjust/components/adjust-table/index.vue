@@ -2,6 +2,7 @@
 import { getTaskList } from "@/apis/level-b";
 import { submitTask } from "@/apis/level-c";
 import { Task } from "@/types";
+import { ElMessage } from "element-plus";
 import { onMounted, reactive, ref } from "vue";
 import { gridData, cities, columns } from './config'
 const dialogTableVisible = ref(false);
@@ -28,6 +29,8 @@ const refreshData = async () => {
 const handleAdjust = (adjustRes: number) => {
   submitTask({ taskId: activeTaskId.value, adjustRes })
   refreshData()
+  ElMessage.success("审核提交成功");
+  dialogTableVisible.value = false
 }
 
 onMounted(() => {

@@ -13,7 +13,7 @@ const header = {
 const dialogVisible = ref(false);
 
 
-const { tableData } = defineProps<{ tableData: Array<TaskFile> }>()
+const { tableData, refreshData } = defineProps<{ tableData: Array<TaskFile>, refreshData: () => void }>()
 
 const data: { fileList: Array<any> } = reactive({
   fileList: []
@@ -45,6 +45,7 @@ const sentTask = () => {
     type: "success",
     message: `文件上传成功！`,
   });
+  refreshData()
 };
 const handleEdit = (index: number, row: TaskFile) => {
   console.log(index, row);
@@ -67,6 +68,7 @@ const handleDispatch = (index: number, row: TaskFile) => {
     type: "success",
     message: `下发成功！`,
   });
+  refreshData()
 };
 
 const handleChange: UploadProps["onChange"] = (uploadFile, uploadFiles) => {
