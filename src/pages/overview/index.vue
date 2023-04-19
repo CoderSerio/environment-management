@@ -9,9 +9,18 @@ import BizType from './components/biz-type/index.vue'
 import TaskProcess from './components/task-process/index.vue'
 import TaskDetail from './components/task-detail/index.vue'
 
-import { onMounted } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { getMapData } from '@/apis/map'
-
+import { useUserStore } from '@/stores';
+import console from 'console'
+const userStore = useUserStore()
+let mapName = ref(userStore.getMap)
+watch(
+  () => userStore.getMap,
+  (newName,oldName)=>{
+    mapName.value = newName
+  },
+)
 
 const getMapData = async () => {
   const data = await getMapData()
@@ -28,17 +37,17 @@ onMounted(() => {
 <template>
   <div class="wrapper">
     <div class="left">
-      <Equipment></Equipment>
-      <Personnel></Personnel>
-      <Aptitude></Aptitude>
+      <Equipment :mapName="mapName"></Equipment>
+      <Personnel :mapName="mapName"></Personnel>
+      <Aptitude :mapName="mapName"></Aptitude>
     </div>
     <div class="center">
       <Map></Map>
-      <BizType></BizType>
+      <BizType :mapName="mapName"></BizType>
     </div>
     <div class="right">
       <TaskProcess></TaskProcess>
-      <TaskDetail></TaskDetail>
+      <TaskDetail :mapName="mapName"></TaskDetail>
     </div>
   </div>
 </template>

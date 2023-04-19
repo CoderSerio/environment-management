@@ -75,8 +75,48 @@ levelA.get("/dispatch-file", (request, response) => {
 	);
 });
 
-levelA.get("/test", (request: Request, response: Response) => {
-	response.send("这是响应的内容");
+//文件删除(过)
+levelA.get("/delete-file", (request, response) => {
+	const binaryData = readFileListData();
+	const data = JSON.parse(binaryData.toString());
+	const queryPair = getQueryPair(request.url);
+	const num = data.findIndex((obj: any) => {
+		return obj.fileId === queryPair.fileId;
+	});
+
+	if (num != -1) data.splice(num, 1);
+
+	writeFileListData(JSON.stringify(data));
+
+	response.send(
+		JSON.stringify({
+			status: 200,
+			msg: "",
+			data: data,
+		})
+	);
+});
+
+//查看进度列表(应该过了)
+levelA.get("/get-progress-list", (request, response) => {
+	const binaryData = readFileListData();
+	const data = JSON.parse(binaryData.toString());
+	// const queryPair = getQueryPair(request.url);
+	// const newdata = data.filter((obj: any) => {
+	// 	return obj.from === queryPair.from;
+	// });
+
+	response.send(
+		JSON.stringify({
+			status: 200,
+			msg: "",
+			data: {
+				hasMore: true,
+				total: 100,
+				list: data,
+			},
+		})
+	);
 });
 
 export default levelA;

@@ -1,6 +1,7 @@
 import express, { Request, Response, Router } from "express";
-import { readTaskListData } from "../utils/file";
+import { readTaskListData, writeTaskListData } from "../utils/file";
 import log from "../utils/log";
+import { getQueryPair } from "../utils/query";
 
 const levelC = express.Router();
 
@@ -23,6 +24,27 @@ levelC.get("/get-task-list", (request: Request, response: Response) => {
 				total: 100,
 				list: data,
 			},
+		})
+	);
+});
+
+// C提交任务
+levelC.get("/submit-task", (request: Request, response: Response) => {
+	const binaryData = readTaskListData();
+	const data = JSON.parse(binaryData);
+	const queryPair = getQueryPair(request?.url);
+
+	data?.forEach((item: any) => {
+		if (+item.taskId == +queryPair.taskId) {
+			item.status = 4;
+		}
+	});
+
+	writeTaskListData(JSON.stringify(data));
+	response.send(
+		JSON.stringify({
+			status: 200,
+			msg: "",
 		})
 	);
 });

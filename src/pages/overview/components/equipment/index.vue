@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import Chart from './chart/index.vue'
+const props = defineProps({mapName:String})
 </script>
 
 <template>
   <div class="wrapper">
-    <el-tag size="large" class="tag">x市设备统计情况</el-tag>
+    <el-tag size="large" class="tag">{{props.mapName}}设备统计情况</el-tag>
     <el-card class="card">
       <div class="charts">
         <Chart></Chart>

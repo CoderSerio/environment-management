@@ -1,3 +1,17 @@
+import { useUserStore } from '@/stores';
+import { watch } from 'vue';
+const userStore = useUserStore()
+let data = [
+	{ value: 156, name: "正常" },
+	{ value: 19, name: "异常" },
+]
+watch(
+	()=>userStore.getMap,
+	(newName,oldName)=>{
+	  data[0].value = Math.round(Math.random()*200);
+	  data[1].value = 200 - data[0].value
+	}
+  )
 export const option = {
 	// tooltip: {
 	// 	trigger: "item",
@@ -43,10 +57,7 @@ export const option = {
 				},
 			},
 
-			data: [
-				{ value: 156, name: "正常" },
-				{ value: 19, name: "异常" },
-			],
+			data: data,
 		},
 	],
 };

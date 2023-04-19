@@ -99,7 +99,7 @@ export const tableData: AdjustTableColumns[] = [
 ];
 
 export const columns = [
-	{ label: "项目", prop: "item" },
+	{ label: "项目", prop: "fileId" },
 	{ label: "时间", prop: "time" },
 	{ label: "单位", prop: "unit" },
 	{ label: "状态", prop: "status" },

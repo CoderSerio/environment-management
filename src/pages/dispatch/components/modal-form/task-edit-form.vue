@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { createTask } from '@/apis/level-b';
 import { FormInstance } from 'element-plus';
 import { reactive, ref, watch } from 'vue'
 import { TABLE_NAME } from '../../type';
@@ -12,6 +13,8 @@ const props = defineProps<{
     defaultFormData: Record<string, any>,
     close: () => void
   }
+  fileIds: Array<string>,
+  refreshData: () => void
 }>()
 
 const formRef = ref<FormInstance>()
@@ -28,11 +31,12 @@ const onSubmit = async () => {
   if (Object.keys(props?.taskEditFormProps?.defaultFormData).length) {
     const index = props.taskEditFormProps.index
     props.taskEditFormProps.tableData[index] = { ...form.value }
-    props.taskEditFormProps.close()
   } else {
     props.taskEditFormProps.tableData.unshift({ ...form.value })
-    props.taskEditFormProps.close()
   }
+  await createTask({ fileId: form?.value?.fileId, userId: '', type: props.taskEditFormProps.tableName, fileData: form?.value })
+  props.taskEditFormProps.close()
+  props.refreshData()
   // }
   // })
 }
@@ -41,8 +45,12 @@ const onSubmit = async () => {
 
 <template>
   <el-form :model="form" label-width="120px" :ref="formRef">
-
     <!-- TODO: 记得把这个封装成配置项 -->
+    <el-form-item label="关联任务文件" required>
+      <el-select v-model="form.fileId" placeholder="请选择关联的任务文件">
+        <el-option v-for="fileId in props.fileIds" :label="`文件${fileId}`" :value="fileId" />
+      </el-select>
+    </el-form-item>
 
     <el-form-item label="市州行政区" v-if="props.taskEditFormProps.tableName === TABLE_NAME.CONTAMINANT" required>
       <el-select v-model="form.district" placeholder="请选择市州行政区">
@@ -58,12 +66,12 @@ const onSubmit = async () => {
       </el-select>
     </el-form-item>
 
-    <el-form-item label="GPS" v-if="props.taskEditFormProps.tableName === TABLE_NAME.ENV_QUALITY" required>
-      <el-select v-model="form.gps" placeholder="请选择GPS">
-        <el-option label="GPS1" value="1" />
-        <el-option label="GPS2" value="1" />
-      </el-select>
-    </el-form-item>
+    <!-- <el-form-item label="GPS" v-if="props.taskEditFormProps.tableName === TABLE_NAME.ENV_QUALITY" required>
+                          <el-select v-model="form.gps" placeholder="请选择GPS">
+                            <el-option label="GPS1" value="1" />
+                            <el-option label="GPS2" value="1" />
+                          </el-select>
+                        </el-form-item> -->
 
 
     <el-form-item label="类别" required>

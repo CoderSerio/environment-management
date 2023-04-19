@@ -15,12 +15,12 @@ export const routes: Iroutes[] = [
 		rightControl: "RIGHT_CONTROL_NONE",
 		component: () => import(/* webpackChunkName: "login" */ "@/pages/login/index.vue"),
 	},
-	{
-		path: "/test-page",
-		name: "开发测试页",
-		rightControl: "RIGHT_CONTROL_NONE",
-		component: () => import(/* webpackChunkName: "test" */ "@/pages/test-page/index.vue"),
-	},
+	// {
+	// 	path: "/test-page",
+	// 	name: "开发测试页",
+	// 	rightControl: "RIGHT_CONTROL_NONE",
+	// 	component: () => import(/* webpackChunkName: "test" */ "@/pages/test-page/index.vue"),
+	// },
 	{
 		path: "/dispatch",
 		name: "任务下发",

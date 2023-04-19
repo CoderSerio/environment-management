@@ -119,12 +119,12 @@ const tableData: User[] = [
                     <span style="float: left">{{ item.label }}</span>
                     <span
                         style="
-                                                                                                                                                                                                                              float: right;
-                                                                                                                                                                                                                              color: var(--el-text-color-secondary);
-                                                                                                                                                                                                                              font-size: 13px;
-                                                                                                                                                                                                                            ">{{
-                                                                                                                                                                                                                                item.value
-                                                                                                                                                                                                                            }}</span>
+                                                                                                                                                                                                                                  float: right;
+                                                                                                                                                                                                                                  color: var(--el-text-color-secondary);
+                                                                                                                                                                                                                                  font-size: 13px;
+                                                                                                                                                                                                                                ">{{
+                                                                                                                                                                                                                                    item.value
+                                                                                                                                                                                                                                }}</span>
                 </el-option>
             </el-select>
         </el-col>
@@ -176,7 +176,7 @@ const tableData: User[] = [
  
 
 
-<style>
+<style scoped>
 .el-table .warning-row {
     background-color: #c6e2ff;
 }
